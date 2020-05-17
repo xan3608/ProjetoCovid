@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import modelo.Estado;
+import projeto.covid.modelo.Estado;
+import projeto.covid.recursos.DiretorioTemp;
 import projeto.covid.scraping.Selenium;
-import recursos.DiretorioTemp;
 
 public class Principal {
 
@@ -16,10 +16,10 @@ public class Principal {
 	private static List<String> listaLinks;
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
-		//DiretorioTemp diretorioBrowser = new DiretorioTemp();
-		//diretorioBrowser.extrairBrowser();
+		DiretorioTemp diretorio = new DiretorioTemp();
+		diretorio.extrairParaTemp();
 		
-		Selenium selenium = new Selenium();
+		Selenium selenium = new Selenium(diretorio);
 		selenium.downloadDados();
 	}
 

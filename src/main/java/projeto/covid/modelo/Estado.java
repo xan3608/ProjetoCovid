@@ -1,4 +1,4 @@
-package modelo;
+package projeto.covid.modelo;
 
 public class Estado {
 

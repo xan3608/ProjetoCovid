@@ -1,4 +1,4 @@
-package recursos;
+package projeto.covid.recursos;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -17,7 +17,7 @@ public class DiretorioTemp {
 	private Path browserDriver = Paths.get(System.getProperty("java.io.tmpdir") + "TempCovid/driver/geckodriver.exe");
 	private Path browserDownload = Paths.get(System.getProperty("java.io.tmpdir") + "TempCovid/files");
 
-	public void extrairBrowser() throws IOException, URISyntaxException {
+	public void extrairParaTemp() throws IOException, URISyntaxException {
 
 		Path path = (Paths.get(System.getProperty("java.io.tmpdir") + "TempCovid"));
 		if (Files.notExists(path)) {
@@ -45,9 +45,6 @@ public class DiretorioTemp {
 			}
 		}
 		zis.close();
-
-		System.err.println(this.browserBinary);
-		System.err.println(this.browserDriver);
 	}
 
 	public Path getBrowserBinary() {

@@ -14,13 +14,17 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import projeto.covid.recursos.DiretorioTemp;
+
 public class Selenium {
 	private WebDriver driver;
 	private Path downloadPath;
 	private String downloadName;
 
-	public Selenium() {
-		this.downloadPath = Paths.get("downloads").toAbsolutePath();
+	public Selenium(DiretorioTemp diretorio) {
+		System.setProperty("webdriver.gecko.driver", diretorio.getBrowserDriver().toString());
+		this.downloadPath = diretorio.getBrowserDownload();
+		
 		FirefoxOptions option = new FirefoxOptions();
 		FirefoxProfile profile = new FirefoxProfile();
 		profile.setPreference("browser.download.dir", downloadPath.toString());
