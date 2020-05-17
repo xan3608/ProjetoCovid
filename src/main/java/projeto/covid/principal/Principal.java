@@ -16,11 +16,11 @@ public class Principal {
 	private static List<String> listaLinks;
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
-		DiretorioTemp diretorioBrowser = new DiretorioTemp();
-		diretorioBrowser.extrairBrowser();
+		//DiretorioTemp diretorioBrowser = new DiretorioTemp();
+		//diretorioBrowser.extrairBrowser();
 		
-		Selenium driver = new Selenium();
-		driver.downloadDados(diretorioBrowser);
+		Selenium selenium = new Selenium();
+		selenium.downloadDados();
 	}
 
 }
