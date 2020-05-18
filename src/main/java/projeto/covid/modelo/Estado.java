@@ -15,7 +15,11 @@ public class Estado extends Brasil {
 
 	@Override
 	public String toString() {
-		return "Estado: " + this.estado + ", Regiao: " + this.regiao + ", Dados cadastrados: " + super.getGrupoDados().size();
+		// return "Estado: " + this.estado + ", Regiao: " + this.regiao + ", Dados
+		// cadastrados: " + super.getGrupoDados().size();
+		return String.format("%-20s%-10s", this.regiao, this.estado);
+
+//		return this.regiao + " - " + this.estado;
 	}
 
 	public String getRegiao() {

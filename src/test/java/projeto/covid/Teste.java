@@ -5,7 +5,7 @@ import java.net.URISyntaxException;
 
 import projeto.covid.modelo.Brasil;
 import projeto.covid.modelo.Dados;
-import projeto.covid.modelo.GrupoEstado;
+import projeto.covid.modelo.GrupoEstados;
 import projeto.covid.modelo.GrupoMunicipios;
 import projeto.covid.modelo.Municipio;
 import projeto.covid.planilha.LeituraPlanilha;
@@ -17,7 +17,7 @@ public class Teste {
 		DiretorioTemp diretorio = new DiretorioTemp();
 		//diretorio.extrairParaTemp();
 		Brasil brasil = new Brasil();
-		GrupoEstado e = new GrupoEstado();
+		GrupoEstados e = new GrupoEstados();
 		GrupoMunicipios m = new GrupoMunicipios();
 //		//Selenium selenium = new Selenium(diretorio);
 //		try{

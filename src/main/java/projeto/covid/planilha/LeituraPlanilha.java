@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import projeto.covid.modelo.Brasil;
-import projeto.covid.modelo.GrupoEstado;
+import projeto.covid.modelo.GrupoEstados;
 import projeto.covid.modelo.GrupoMunicipios;
 import projeto.covid.recursos.DiretorioTemp;
 
@@ -25,7 +25,7 @@ public class LeituraPlanilha {
 		this.arquivoPath = diretorio.getBrowserDownload().resolve(arquivoNome).toAbsolutePath();
 	}
 
-	public void lerDados(Brasil brasil, GrupoEstado GrupoEstados, GrupoMunicipios GrupoMunicipios) throws IOException {
+	public void lerDados(Brasil brasil, GrupoEstados GrupoEstados, GrupoMunicipios GrupoMunicipios) throws IOException {
 		File arquivo = this.arquivoPath.toFile();
 		FileInputStream fis = new FileInputStream(arquivo);
 		XSSFWorkbook planilha = new XSSFWorkbook(fis);

@@ -15,7 +15,9 @@ public class Municipio extends Estado {
 
 	@Override
 	public String toString() {
-		return "Municipio: " + this.municipio + ", RegiaoSaude: " + this.regiaoSaude + ", " + super.toString();
+//		return "Municipio: " + this.municipio + ", RegiaoSaude: " + this.regiaoSaude + ", " + super.toString();
+		return String.format("%-20s%-10s", super.getEstado(), this.municipio);
+//		return super.getEstado() + " - " +  this.municipio;
 	}
 	
 	public String getMunicipio() {
