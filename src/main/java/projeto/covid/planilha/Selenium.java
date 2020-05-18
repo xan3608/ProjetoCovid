@@ -1,7 +1,6 @@
-package projeto.covid.scraping;
+package projeto.covid.planilha;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
