@@ -1,45 +1,27 @@
 package projeto.covid.modelo;
 
-public class Estado {
+public class Estado extends Brasil{
+	private String regiao, estado;
 
-	private String nome;
-	private Integer qtdeConfirmados, qtdeRecuperados, qtdeMortos;
+	@Override
+	public String toString() {
+		return super.toString() + " Regiao: '" + this.regiao + "' Estado: '" + this.estado + "' ";
+	}
 	
-	public Estado(String nome, String qtdeConfirmados, String qtdeMortos) {
-		this.nome = nome;
-		this.qtdeConfirmados = Integer.parseInt(qtdeConfirmados);
-		this.qtdeMortos = Integer.parseInt(qtdeMortos);
+	public String getRegiao() {
+		return regiao;
 	}
 
-	public String getNome() {
-		return nome;
+	public void setRegiao(String regiao) {
+		this.regiao = regiao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getEstado() {
+		return estado;
 	}
 
-	public Integer getQtdeConfirmados() {
-		return qtdeConfirmados;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
-
-	public void setQtdeConfirmados(Integer qtdeConfirmados) {
-		this.qtdeConfirmados = qtdeConfirmados;
-	}
-
-	public Integer getQtdeRecuperados() {
-		return qtdeRecuperados;
-	}
-
-	public void setQtdeRecuperados(Integer qtdeRecuperados) {
-		this.qtdeRecuperados = qtdeRecuperados;
-	}
-
-	public Integer getQtdeMortos() {
-		return qtdeMortos;
-	}
-
-	public void setQtdeMortos(Integer qtdeMortos) {
-		this.qtdeMortos = qtdeMortos;
-	}
+	
 }
