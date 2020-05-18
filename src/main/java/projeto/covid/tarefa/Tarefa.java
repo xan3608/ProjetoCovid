@@ -1,20 +1,31 @@
 package projeto.covid.tarefa;
 
-import projeto.covid.auxilio.Ponte;
-import projeto.covid.eventos.ComponentesGUI;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import projeto.covid.recursos.DiretorioTemp;
+import projeto.covid.scraping.Selenium;
 
 public class Tarefa implements Runnable {
 
 	@Override
 	public void run() {
-		ComponentesGUI gui = Ponte.getComponentesGUI();
-
-		System.out.println("Fui iniciada");
-		while (true) {
-			Ponte.esperar();
-			System.out.println("Cliquei no botão");
-			Ponte.setContinuar(false);
+		
+		DiretorioTemp diretorio = new DiretorioTemp();
+		try {
+			diretorio.extrairParaTemp();
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+			System.out.println("Erro ao extrair para diretorio temporario");
 		}
+		
+		Selenium selenium = new Selenium(diretorio);
+		selenium.downloadDados();
 	}
-
+	
 }

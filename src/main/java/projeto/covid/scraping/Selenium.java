@@ -1,7 +1,6 @@
 package projeto.covid.scraping;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
@@ -24,7 +23,7 @@ public class Selenium {
 	public Selenium(DiretorioTemp diretorio) {
 		System.setProperty("webdriver.gecko.driver", diretorio.getBrowserDriver().toString());
 		this.downloadPath = diretorio.getBrowserDownload();
-		
+
 		FirefoxOptions option = new FirefoxOptions();
 		FirefoxProfile profile = new FirefoxProfile();
 		profile.setPreference("browser.download.dir", downloadPath.toString());
@@ -32,7 +31,7 @@ public class Selenium {
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
 				"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;");
 		option.setProfile(profile);
-		// option.setHeadless(true);
+		option.setHeadless(true);
 		this.driver = new FirefoxDriver(option);
 	}
 
@@ -41,11 +40,11 @@ public class Selenium {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
 			driver.get("https://covid.saude.gov.br/");
-			
+
 			String botaoDownloadSelector = "ion-button.btn-white.md.button.button-solid.button-has-icon-only.ion-activatable.ion-focusable.hydrated";
 			WebElement botaoDownload = wait
 					.until(ExpectedConditions.elementToBeClickable(By.cssSelector(botaoDownloadSelector)));
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(botaoDownload));
 			js.executeScript("arguments[0].click();", botaoDownload);
 			esperarDownload(wait, js);
