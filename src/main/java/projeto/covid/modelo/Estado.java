@@ -1,19 +1,29 @@
 package projeto.covid.modelo;
 
-public class Estado extends Brasil{
-	private String regiao, estado;
+public class Estado extends Brasil {
+	private String estado, regiao;
+
+	public Estado(String estado, String regiao) {
+		super();
+		this.setEstado(estado);
+		this.setRegiao(regiao);
+	}
+
+	public Estado() {
+		super();
+	}
 
 	@Override
 	public String toString() {
-		return super.toString() + " Regiao: '" + this.regiao + "' Estado: '" + this.estado + "' ";
+		return "Estado: " + this.estado + ", Regiao: " + this.regiao + ", Dados cadastrados: " + super.getGrupoDados().size();
 	}
-	
+
 	public String getRegiao() {
 		return regiao;
 	}
 
 	public void setRegiao(String regiao) {
-		this.regiao = regiao;
+		this.regiao = regiao.toUpperCase().trim();
 	}
 
 	public String getEstado() {
@@ -21,7 +31,7 @@ public class Estado extends Brasil{
 	}
 
 	public void setEstado(String estado) {
-		this.estado = estado;
+		this.estado = estado.toUpperCase().trim();
 	}
-	
+
 }

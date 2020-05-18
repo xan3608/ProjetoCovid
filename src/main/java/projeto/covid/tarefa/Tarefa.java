@@ -3,13 +3,8 @@ package projeto.covid.tarefa;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import projeto.covid.planilha.Selenium;
 import projeto.covid.recursos.DiretorioTemp;
-import projeto.covid.scraping.Selenium;
 
 public class Tarefa implements Runnable {
 

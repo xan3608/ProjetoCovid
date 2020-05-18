@@ -1,55 +1,28 @@
 package projeto.covid.modelo;
 
-public class Brasil {
-	private String data;
-	private Integer populacao, semanaEpidemia, casosAcumulados, obitosAcumulados;
+import java.util.ArrayList;
+import java.util.List;
 
+public class Brasil {
+	private List<Dados> grupoDados;
+
+	public Brasil() {
+		this.grupoDados = new ArrayList<Dados>();
+	}
 	
 	@Override
 	public String toString() {
-		return "Data: '" + this.data + "' Populacao: '" + this.populacao + "' SemanaEpidemia: '" + this.semanaEpidemia
-				+ "' Casos Acumulados: '" + this.casosAcumulados + "' Obitos Acumulados: '" + this.obitosAcumulados
-				+ "'";
+		return "Brasil, Dados: " + grupoDados.size();
+	}
+	public List<Dados> getGrupoDados() {
+		return grupoDados;
 	}
 
-	public String getData() {
-		return data;
+	public void setGrupoDados(Dados dados) {
+		this.grupoDados.add(dados);
 	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public Integer getPopulacao() {
-		return populacao;
-	}
-
-	public void setPopulacao(Integer populacao) {
-		this.populacao = populacao;
-	}
-
-	public Integer getSemanaEpidemia() {
-		return semanaEpidemia;
-	}
-
-	public void setSemanaEpidemia(Integer semanaEpidemia) {
-		this.semanaEpidemia = semanaEpidemia;
-	}
-
-	public Integer getCasosAcumulados() {
-		return casosAcumulados;
-	}
-
-	public void setCasosAcumulados(Integer casosAcumulados) {
-		this.casosAcumulados = casosAcumulados;
-	}
-
-	public Integer getObitosAcumulados() {
-		return obitosAcumulados;
-	}
-
-	public void setObitosAcumulados(Integer obitosAcumulados) {
-		this.obitosAcumulados = obitosAcumulados;
+	public void setGrupoDados(List<Dados> grupoDados) {
+		this.grupoDados = grupoDados;
 	}
 
 }

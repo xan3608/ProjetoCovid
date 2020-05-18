@@ -17,4 +17,17 @@ public class GrupoEstado {
 	public void setGrupoEstado(Estado estado) {
 		this.grupoEstado.add(estado);
 	}
+
+	public Estado buscarEstado(String nomeEstado) {
+		for (Estado estado : this.grupoEstado) {
+			if (estado.getEstado().equalsIgnoreCase(nomeEstado.trim().toUpperCase())) {
+				return estado;
+			}
+		}
+		return null;
+	}
+	 @Override
+	public String toString() {
+		return "Estados cadastrados: " + this.grupoEstado.size();
+	}
 }

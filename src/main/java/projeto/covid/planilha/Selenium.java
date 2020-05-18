@@ -31,27 +31,23 @@ public class Selenium {
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
 				"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;");
 		option.setProfile(profile);
-		option.setHeadless(true);
+		// option.setHeadless(true);
 		this.driver = new FirefoxDriver(option);
 	}
 
 	public void downloadDados() {
 		WebDriverWait wait = new WebDriverWait(driver, 120);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			driver.get("https://covid.saude.gov.br/");
+		driver.get("https://covid.saude.gov.br/");
 
-			String botaoDownloadSelector = "ion-button.btn-white.md.button.button-solid.button-has-icon-only.ion-activatable.ion-focusable.hydrated";
-			WebElement botaoDownload = wait
-					.until(ExpectedConditions.elementToBeClickable(By.cssSelector(botaoDownloadSelector)));
+		String botaoDownloadSelector = "ion-button.btn-white.md.button.button-solid.button-has-icon-only.ion-activatable.ion-focusable.hydrated";
+		WebElement botaoDownload = wait
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector(botaoDownloadSelector)));
 
-			wait.until(ExpectedConditions.elementToBeClickable(botaoDownload));
-			js.executeScript("arguments[0].click();", botaoDownload);
-			esperarDownload(wait, js);
-		} catch (Exception e) {
-		} finally {
-			driver.quit();
-		}
+		wait.until(ExpectedConditions.elementToBeClickable(botaoDownload));
+		js.executeScript("arguments[0].click();", botaoDownload);
+		esperarDownload(wait, js);
+		driver.quit();
 	}
 
 	private void esperarDownload(WebDriverWait wait, JavascriptExecutor js) {
@@ -63,7 +59,9 @@ public class Selenium {
 		String downlaodselector = "richlistitem.download > hbox > vbox > ";
 		WebElement donwloadProgress = wait
 				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(downlaodselector + "progress")));
+		System.out.println("Comecando download");
 		this.downloadName = driver.findElement(By.cssSelector(downlaodselector + "description")).getAttribute("value");
+		System.out.println("Esperando download");
 		wait.until(ExpectedConditions.invisibilityOf(donwloadProgress));
 		System.out.println("Download concluido");
 		driver.close();

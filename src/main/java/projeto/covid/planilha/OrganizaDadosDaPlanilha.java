@@ -4,60 +4,46 @@ import java.util.List;
 
 import projeto.covid.modelo.Brasil;
 import projeto.covid.modelo.Estado;
-import projeto.covid.modelo.GrupoBrasil;
 import projeto.covid.modelo.GrupoEstado;
-import projeto.covid.modelo.GrupoMunicipio;
+import projeto.covid.modelo.GrupoMunicipios;
 import projeto.covid.modelo.Municipio;
 
 public class OrganizaDadosDaPlanilha {
 
-	public static void organizarDados(List<DadosLinha> dados, GrupoBrasil grupoBrasil, GrupoEstado grupoEstado,
-			GrupoMunicipio grupoMunicipio) {
-		
-		for (DadosLinha linha : dados) {
-			if (linha.getRegiao().equals("Brasil") && linha.getEstado() == null) {
-				grupoBrasil.setGrupoBrasil(popularBrasil(linha, grupoBrasil));
-			} else if (linha.getMunicipio() == null) {
-				grupoEstado.setGrupoEstado(popularEstado(linha, grupoEstado));
+	public static void organizarDados(List<DadosDaLinha> dados, Brasil brasil, GrupoEstado grupoEstados,
+			GrupoMunicipios grupoMunicipios) {
+
+		for (DadosDaLinha linha : dados) {
+			if (linha.getRegiao().equalsIgnoreCase("Brasil")) {
+				brasil.setGrupoDados(linha.getDados());
+			} else if (linha.getMunicipio() == null || linha.getMunicipio().isEmpty()) {
+				Estado estado = grupoEstados.buscarEstado(linha.getEstado());
+				if (estado != null) {
+					estado.setGrupoDados(linha.getDados());
+				} else {
+					grupoEstados.setGrupoEstado(popularEstado(linha));
+				}
 			} else {
-				grupoMunicipio.setGrupoMunicipios(popularMunicipio(linha, grupoMunicipio));
+				Municipio municipio = grupoMunicipios.buscarMunicipio(linha.getMunicipio());
+				if (municipio != null) {
+					municipio.setGrupoDados(linha.getDados());
+				} else {
+					grupoMunicipios.setGrupoMunicipios(popularMunicipio(linha));
+				}
 			}
 		}
 	}
 
-	private static Municipio popularMunicipio(DadosLinha planilha, GrupoMunicipio grupoMunicipio) {
-		Municipio municipio = new Municipio();
-		municipio.setData(planilha.getData());
-		municipio.setPopulacao(planilha.getPopulacao());
-		municipio.setCasosAcumulados(planilha.getCasosAcumulados());
-		municipio.setObitosAcumulados(planilha.getObitosAcumulados());
-		municipio.setSemanaEpidemia(planilha.getSemanaEpidemia());
-		municipio.setRegiao(planilha.getRegiao());
-		municipio.setEstado(planilha.getEstado());
-		municipio.setMunicipio(planilha.getMunicipio());
-		municipio.setRegiaoSaude(planilha.getRegiaoSaude());
+	private static Municipio popularMunicipio(DadosDaLinha linha) {
+		Municipio municipio = new Municipio(linha.getMunicipio(), linha.getRegiaoSaude(), linha.getEstado(),
+				linha.getRegiao());
+		municipio.setGrupoDados(linha.getDados());
 		return municipio;
 	}
 
-	private static Estado popularEstado(DadosLinha planilha, GrupoEstado grupoEstado) {
-		Estado estado = new Estado();
-		estado.setData(planilha.getData());
-		estado.setPopulacao(planilha.getPopulacao());
-		estado.setCasosAcumulados(planilha.getCasosAcumulados());
-		estado.setObitosAcumulados(planilha.getObitosAcumulados());
-		estado.setSemanaEpidemia(planilha.getSemanaEpidemia());
-		estado.setRegiao(planilha.getRegiao());
-		estado.setEstado(planilha.getEstado());
+	private static Estado popularEstado(DadosDaLinha linha) {
+		Estado estado = new Estado(linha.getEstado(), linha.getRegiao());
+		estado.setGrupoDados(linha.getDados());
 		return estado;
-	}
-
-	private static Brasil popularBrasil(DadosLinha planilha, GrupoBrasil grupoBrasil) {
-		Brasil brasil = new Brasil();
-		brasil.setData(planilha.getData());
-		brasil.setPopulacao(planilha.getPopulacao());
-		brasil.setCasosAcumulados(planilha.getCasosAcumulados());
-		brasil.setObitosAcumulados(planilha.getObitosAcumulados());
-		brasil.setSemanaEpidemia(planilha.getSemanaEpidemia());
-		return brasil;
 	}
 }
