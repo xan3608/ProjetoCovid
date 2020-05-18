@@ -113,6 +113,10 @@ public class DadosPlanilha {
 			}
 		}
 	}
+	
+	public List<DadosLinha> getDadosDasLinhas() {
+		return this.dadosDasLinhas;
+	}
 
 //	public static void main(String[] args) {
 //		try {

@@ -6,7 +6,7 @@ public class Municipio extends Estado {
 	
 	@Override
 	public String toString() {
-		return super.toString() + " Municipio: '" + this.municipio + "' RegiaoSaude: " + this.regiaoSaude;
+		return this.municipio;
 	}
 	
 	public String getMunicipio() {

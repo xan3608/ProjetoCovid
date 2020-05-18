@@ -5,7 +5,7 @@ public class Estado extends Brasil{
 
 	@Override
 	public String toString() {
-		return super.toString() + " Regiao: '" + this.regiao + "' Estado: '" + this.estado + "' ";
+		return this.estado;
 	}
 	
 	public String getRegiao() {
