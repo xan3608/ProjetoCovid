@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -11,6 +12,7 @@
         <items>
             <Button mnemonicParsing="false" onAction="#botaoSelecionar" prefWidth="80.0" text="Selecionar" />
           <Button mnemonicParsing="false" onAction="#botaoVoltar" prefWidth="80.0" text="Voltar" />
+            <TextField fx:id="txFiltroEstado" alignment="CENTER_RIGHT" editable="false" onKeyPressed="#filtroEstado" prefWidth="412.0" promptText="Pesquise por um Estado" />
         </items>
       </ToolBar>
    </bottom>

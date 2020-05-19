@@ -1,4 +1,4 @@
-package projeto.covid.modelo.recursos.planilha;
+package projeto.covid.modelo.database.planilha;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import projeto.covid.modelo.Brasil;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
-import projeto.covid.modelo.recursos.temporario.DiretorioTemp;
+import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class LeituraPlanilha {
 	private Path arquivoPath;

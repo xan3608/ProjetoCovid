@@ -1,7 +1,7 @@
 package projeto.covid.controler;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.Collections;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -12,9 +12,8 @@ import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Brasil;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
-import projeto.covid.modelo.recursos.planilha.LeituraPlanilha;
-import projeto.covid.modelo.recursos.scraping.Selenium;
-import projeto.covid.modelo.recursos.temporario.DiretorioTemp;
+import projeto.covid.modelo.database.planilha.LeituraPlanilha;
+import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class FXMLLoadingController implements TelaMudanca {
 
@@ -65,6 +64,8 @@ public class FXMLLoadingController implements TelaMudanca {
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
 					consoleLoading.appendText("Dados lidos com sucesso!\n");
+					Collections.sort(grupoEstados.getGrupoEstado());
+					Collections.sort(grupoMunicipios.getGrupoMunicipios());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

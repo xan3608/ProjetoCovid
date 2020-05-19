@@ -1,4 +1,4 @@
-package projeto.covid.modelo.recursos.planilha;
+package projeto.covid.modelo.database.planilha;
 
 import java.util.List;
 

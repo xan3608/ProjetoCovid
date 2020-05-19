@@ -1,4 +1,4 @@
-package projeto.covid.modelo.recursos.temporario;
+package projeto.covid.modelo.database.temporario;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

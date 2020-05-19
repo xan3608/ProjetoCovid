@@ -1,4 +1,4 @@
-package projeto.covid.modelo.recursos.temporario;
+package projeto.covid.modelo.database.temporario;
 
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
