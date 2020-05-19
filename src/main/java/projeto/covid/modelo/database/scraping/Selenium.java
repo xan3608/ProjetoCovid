@@ -31,7 +31,7 @@ public class Selenium {
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
 				"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;");
 		option.setProfile(profile);
-		option.setHeadless(true);
+		option.setHeadless(false);
 		this.driver = new FirefoxDriver(option);
 	}
 
