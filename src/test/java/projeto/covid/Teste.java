@@ -29,7 +29,7 @@ public class Teste {
 		
 		
 		//LeituraPlanilha dp = new LeituraPlanilha(diretorio, selenium.getDownloadName());
-		LeituraPlanilha dp = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20200517.xlsx");
+		LeituraPlanilha dp = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_18mai2020.xlsx");
 		dp.lerDados(brasil, e, m);
 		Municipio mm = m.buscarMunicipio("novo gama");
 		for(Dados d : mm.getGrupoDados()) {
