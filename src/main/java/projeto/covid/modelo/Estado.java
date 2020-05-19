@@ -1,6 +1,6 @@
 package projeto.covid.modelo;
 
-public class Estado extends Brasil {
+public class Estado extends Brasil implements Comparable<Estado> {
 	private String estado, regiao;
 
 	public Estado(String estado, String regiao) {
@@ -36,6 +36,15 @@ public class Estado extends Brasil {
 
 	public void setEstado(String estado) {
 		this.estado = estado.toUpperCase().trim();
+	}
+
+	@Override
+	public int compareTo(Estado e) {
+		if (this.regiao.compareToIgnoreCase(e.getRegiao()) != 0) {
+			return 0;
+		} else {
+			return +this.estado.compareToIgnoreCase(e.getEstado());
+		}
 	}
 
 }

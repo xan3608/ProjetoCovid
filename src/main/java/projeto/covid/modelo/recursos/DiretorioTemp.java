@@ -1,4 +1,4 @@
-package projeto.covid.recursos;
+package projeto.covid.modelo.recursos;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

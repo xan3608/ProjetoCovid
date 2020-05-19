@@ -1,6 +1,4 @@
-package projeto.covid.auxilio;
-
-import projeto.covid.eventos.ComponentesGUI;
+package projeto.covid.controler.eventos;
 
 public class Ponte {
 

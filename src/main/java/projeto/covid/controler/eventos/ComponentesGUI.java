@@ -1,4 +1,4 @@
-package projeto.covid.eventos;
+package projeto.covid.controler.eventos;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

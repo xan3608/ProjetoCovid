@@ -33,7 +33,7 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 		} else {
 			System.out.println(lvMunicipios.getSelectionModel().getSelectedItem());
 			// futura tela
-//			Principal.trocarTela(null, lvMunicipios.getSelectionModel().getSelectedItem());
+			// Principal.trocarTela(null, lvMunicipios.getSelectionModel().getSelectedItem());
 		}
 	}
 

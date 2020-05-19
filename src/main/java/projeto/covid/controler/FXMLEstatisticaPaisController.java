@@ -25,7 +25,7 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
 		alertaSelecao.showAndWait();
 
 		// futura tela
-//			Principal.trocarTela(null, obj);
+		// Principal.trocarTela(null, obj);
 	}
 
 	@FXML

@@ -1,4 +1,4 @@
-package projeto.covid.planilha;
+package projeto.covid.modelo.recursos.planilha;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import projeto.covid.modelo.Brasil;
 import projeto.covid.modelo.GrupoEstados;
 import projeto.covid.modelo.GrupoMunicipios;
-import projeto.covid.recursos.DiretorioTemp;
+import projeto.covid.modelo.recursos.DiretorioTemp;
 
 public class LeituraPlanilha {
 	private Path arquivoPath;
@@ -39,7 +39,6 @@ public class LeituraPlanilha {
 
 	private void lerDadosPagina(XSSFSheet pagina, List<DadosDaLinha> dadosDasLinhas) {
 		Iterator<Row> linhasIterator = pagina.iterator();
-
 		
 		linhasIterator.next(); // pula cabeçalho
 		int linhaind = 1;

@@ -1,4 +1,4 @@
-package projeto.covid.recursos;
+package projeto.covid.modelo.recursos;
 
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;

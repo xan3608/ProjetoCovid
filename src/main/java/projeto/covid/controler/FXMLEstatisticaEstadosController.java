@@ -1,5 +1,7 @@
 package projeto.covid.controler;
 
+import java.util.Collections;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -33,7 +35,7 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 		} else {
 			System.out.println(lvEstados.getSelectionModel().getSelectedItem());
 			// futura tela
-//			Principal.trocarTela(null, lvEstados.getSelectionModel().getSelectedItem());
+			// Principal.trocarTela(null, lvEstados.getSelectionModel().getSelectedItem());
 		}
 	}
 
@@ -52,7 +54,7 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 	}
 
 	public void carregarEstados() {
-		grupoEstados.getGrupoEstado().sort((e1, e2) -> e1.getRegiao().compareToIgnoreCase(e2.getRegiao()));
+		Collections.sort(grupoEstados.getGrupoEstado());
 		lvEstados.getItems().clear();
 		for (Estado estado : grupoEstados.getGrupoEstado()) {
 			lvEstados.getItems().add(estado);

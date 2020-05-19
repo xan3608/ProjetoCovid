@@ -1,4 +1,4 @@
-package projeto.covid.planilha;
+package projeto.covid.modelo.recursos.planilha;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import projeto.covid.recursos.DiretorioTemp;
+import projeto.covid.modelo.recursos.DiretorioTemp;
 
 public class Selenium {
 	private WebDriver driver;
@@ -31,7 +31,7 @@ public class Selenium {
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
 				"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;");
 		option.setProfile(profile);
-		// option.setHeadless(true);
+		option.setHeadless(true);
 		this.driver = new FirefoxDriver(option);
 	}
 

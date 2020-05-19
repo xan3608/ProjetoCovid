@@ -8,9 +8,9 @@ import projeto.covid.modelo.Dados;
 import projeto.covid.modelo.GrupoEstados;
 import projeto.covid.modelo.GrupoMunicipios;
 import projeto.covid.modelo.Municipio;
-import projeto.covid.planilha.LeituraPlanilha;
-import projeto.covid.planilha.Selenium;
-import projeto.covid.recursos.DiretorioTemp;
+import projeto.covid.modelo.recursos.DiretorioTemp;
+import projeto.covid.modelo.recursos.planilha.LeituraPlanilha;
+import projeto.covid.modelo.recursos.planilha.Selenium;
 
 public class Teste {
 	public static void main(String[] args) throws IOException, URISyntaxException {

@@ -11,47 +11,53 @@ import javafx.stage.Stage;
 public class Principal extends Application {
 
 	private static Stage stage;
-	
+
+	private static Scene sceneLoading;
 	private static Scene scenePrincipal;
 	private static Scene sceneEstatisticaPais;
 	private static Scene sceneEstatisticaEstados;
 	private static Scene sceneEstatisticaMunicipios;
-	
+
 	private static ArrayList<TelaMudanca> ouvintes = new ArrayList<>();
-	
+
 	@Override
 	public void start(Stage primaryStage) {
-		
+
 		try {
 			stage = primaryStage;
-			
+
 			stage.setTitle("Projeto Covid-19");
-			
+
+			Parent fxmlLoading = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLLoading.fxml"));
 			Parent fxmlPrincipal = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLPrincipal.fxml"));
-			Parent fxmlEstatisticaPais = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLEstatisticaPais.fxml"));
-			Parent fxmlEstatisticaEstados = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLEstatisticaEstados.fxml"));
-			Parent fxmlEstatisticaMunicipios = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLEstatisticaMunicipios.fxml"));
-			
+			Parent fxmlEstatisticaPais = FXMLLoader
+					.load(getClass().getResource("../visualizacao/FXMLEstatisticaPais.fxml"));
+			Parent fxmlEstatisticaEstados = FXMLLoader
+					.load(getClass().getResource("../visualizacao/FXMLEstatisticaEstados.fxml"));
+			Parent fxmlEstatisticaMunicipios = FXMLLoader
+					.load(getClass().getResource("../visualizacao/FXMLEstatisticaMunicipios.fxml"));
+
+			sceneLoading = new Scene(fxmlLoading);
 			scenePrincipal = new Scene(fxmlPrincipal);
 			sceneEstatisticaPais = new Scene(fxmlEstatisticaPais);
 			sceneEstatisticaEstados = new Scene(fxmlEstatisticaEstados);
 			sceneEstatisticaMunicipios = new Scene(fxmlEstatisticaMunicipios);
-			
-			stage.setScene(scenePrincipal);
+
+			stage.setScene(sceneLoading);
 			stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	public static void trocarTela(Telas tela) {
 		trocarTela(tela, null);
 	}
-	
+
 	public static void trocarTela(Telas tela, Object dados) {
 		switch (tela.getValor()) {
 		case 1:
@@ -76,11 +82,11 @@ public class Principal extends Application {
 			break;
 		}
 	}
-	
+
 	public static void addTelaMudanca(TelaMudanca novaTela) {
 		ouvintes.add(novaTela);
 	}
-	
+
 	private static void notificarTodosOuvintes(Telas novaTela, Object dados) {
 		for (TelaMudanca telaMudanca : ouvintes) {
 			telaMudanca.mudouTela(novaTela, dados);
