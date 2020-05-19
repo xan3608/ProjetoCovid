@@ -21,7 +21,7 @@ public class GrupoMunicipio {
 	public ArrayList<Municipio> buscarVariosMunicipios(String nomeMunicipio) {
 		ArrayList<Municipio> municipiosEncontrados = new ArrayList<Municipio>();
 		for (Municipio municipio : this.grupoMunicipios) {
-			if (municipio.getMunicipio().contains(nomeMunicipio.trim().toUpperCase())) {
+			if (Filtro.contanisIgnoreAccents(municipio.getMunicipio(), nomeMunicipio.trim().toUpperCase())) {
 				municipiosEncontrados.add(municipio);
 			}
 		}

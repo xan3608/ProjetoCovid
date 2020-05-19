@@ -29,9 +29,8 @@ public class GrupoEstado {
 
 	public ArrayList<Estado> buscarVariosEstados(String nomeEstado) {
 		ArrayList<Estado> estadosEncontrados = new ArrayList<Estado>();
-
 		for (Estado estado : this.grupoEstado) {
-			if (estado.getEstado().contains(nomeEstado.trim().toUpperCase())) {
+			if (Filtro.contanisIgnoreAccents(estado.getEstado(), nomeEstado.trim().toUpperCase())) {
 				estadosEncontrados.add(estado);
 			}
 		}

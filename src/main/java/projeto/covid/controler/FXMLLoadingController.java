@@ -45,13 +45,13 @@ public class FXMLLoadingController implements TelaMudanca {
 
 				DiretorioTemp diretorio = new DiretorioTemp();
 				consoleLoading.appendText("Extraindo arquivos\n");
-				try {
-					diretorio.extrairParaTemp();
+//				try {
+//					diretorio.extrairParaTemp();
 					consoleLoading.appendText("Arquivos extraidos com sucesso\n");
-				} catch (IOException | URISyntaxException e) {
+//				} catch (IOException | URISyntaxException e) {
 					consoleLoading.appendText("Erro ao extrair arquivos\n");
-					e.printStackTrace();
-				}
+//					e.printStackTrace();
+//				}
 				
 				consoleLoading.appendText("Iniciando selenium\n");
 				Selenium selenium = new Selenium(diretorio);
