@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
-import projeto.covid.modelo.GrupoMunicipios;
+import projeto.covid.controler.auxilio.TelaMudanca;
+import projeto.covid.controler.auxilio.Telas;
+import projeto.covid.controler.principal.Principal;
+import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Municipio;
 
 public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
@@ -13,7 +16,7 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 	@FXML
 	private ListView<Municipio> lvMunicipios;
 
-	private GrupoMunicipios grupoMunicipios;
+	private GrupoMunicipio grupoMunicipios;
 
 	@FXML
 	protected void botaoVoltar(ActionEvent event) {
@@ -45,7 +48,7 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_MUNICIPIOS)) {
-			grupoMunicipios = (GrupoMunicipios) dados;
+			grupoMunicipios = (GrupoMunicipio) dados;
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + grupoMunicipios);
 			carregarMunicipios();
 		}

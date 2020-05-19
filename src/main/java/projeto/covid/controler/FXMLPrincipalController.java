@@ -2,15 +2,18 @@ package projeto.covid.controler;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import projeto.covid.controler.auxilio.TelaMudanca;
+import projeto.covid.controler.auxilio.Telas;
+import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Brasil;
-import projeto.covid.modelo.GrupoEstados;
-import projeto.covid.modelo.GrupoMunicipios;
+import projeto.covid.modelo.GrupoEstado;
+import projeto.covid.modelo.GrupoMunicipio;
 
 public class FXMLPrincipalController implements TelaMudanca {
 
 	private Brasil brasil;
-	private GrupoEstados ge;
-	private GrupoMunicipios gm;
+	private GrupoEstado ge;
+	private GrupoMunicipio gm;
 
 	@FXML
 	protected void botaoPais(ActionEvent event) {

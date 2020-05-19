@@ -7,15 +7,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
+import projeto.covid.controler.auxilio.TelaMudanca;
+import projeto.covid.controler.auxilio.Telas;
+import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Estado;
-import projeto.covid.modelo.GrupoEstados;
+import projeto.covid.modelo.GrupoEstado;
 
 public class FXMLEstatisticaEstadosController implements TelaMudanca {
 
 	@FXML
 	private ListView<Estado> lvEstados;
 
-	private GrupoEstados grupoEstados;
+	private GrupoEstado grupoEstados;
 
 	@FXML
 	protected void botaoVoltar(ActionEvent event) {
@@ -47,7 +50,7 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_ESTADO)) {
-			this.grupoEstados = (GrupoEstados) dados;
+			this.grupoEstados = (GrupoEstado) dados;
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + grupoEstados);
 			carregarEstados();
 		}

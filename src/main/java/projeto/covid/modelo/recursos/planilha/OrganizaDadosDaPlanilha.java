@@ -4,14 +4,14 @@ import java.util.List;
 
 import projeto.covid.modelo.Brasil;
 import projeto.covid.modelo.Estado;
-import projeto.covid.modelo.GrupoEstados;
-import projeto.covid.modelo.GrupoMunicipios;
+import projeto.covid.modelo.GrupoEstado;
+import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Municipio;
 
 public class OrganizaDadosDaPlanilha {
 
-	public static void organizarDados(List<DadosDaLinha> dados, Brasil brasil, GrupoEstados grupoEstados,
-			GrupoMunicipios grupoMunicipios) {
+	public static void organizarDados(List<DadosDaLinha> dados, Brasil brasil, GrupoEstado grupoEstados,
+			GrupoMunicipio grupoMunicipios) {
 
 		for (DadosDaLinha linha : dados) {
 			if (linha.getRegiao().equalsIgnoreCase("Brasil")) {

@@ -3,10 +3,10 @@ package projeto.covid.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrupoMunicipios {
+public class GrupoMunicipio {
 	private List<Municipio> grupoMunicipios;
 	
-	public GrupoMunicipios() {
+	public GrupoMunicipio() {
 		this.grupoMunicipios = new ArrayList<Municipio>();
 	}
 

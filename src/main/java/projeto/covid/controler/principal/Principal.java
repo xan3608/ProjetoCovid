@@ -1,4 +1,4 @@
-package projeto.covid.controler;
+package projeto.covid.controler.principal;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import projeto.covid.controler.auxilio.TelaMudanca;
+import projeto.covid.controler.auxilio.Telas;
 
 public class Principal extends Application {
 
@@ -28,14 +30,14 @@ public class Principal extends Application {
 
 			stage.setTitle("Projeto Covid-19");
 
-			Parent fxmlLoading = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLLoading.fxml"));
-			Parent fxmlPrincipal = FXMLLoader.load(getClass().getResource("../visualizacao/FXMLPrincipal.fxml"));
+			Parent fxmlLoading = FXMLLoader.load(getClass().getResource("../../visualizacao/FXMLLoading.fxml"));
+			Parent fxmlPrincipal = FXMLLoader.load(getClass().getResource("../../visualizacao/FXMLPrincipal.fxml"));
 			Parent fxmlEstatisticaPais = FXMLLoader
-					.load(getClass().getResource("../visualizacao/FXMLEstatisticaPais.fxml"));
+					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaPais.fxml"));
 			Parent fxmlEstatisticaEstados = FXMLLoader
-					.load(getClass().getResource("../visualizacao/FXMLEstatisticaEstados.fxml"));
+					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaEstados.fxml"));
 			Parent fxmlEstatisticaMunicipios = FXMLLoader
-					.load(getClass().getResource("../visualizacao/FXMLEstatisticaMunicipios.fxml"));
+					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaMunicipios.fxml"));
 
 			sceneLoading = new Scene(fxmlLoading);
 			scenePrincipal = new Scene(fxmlPrincipal);

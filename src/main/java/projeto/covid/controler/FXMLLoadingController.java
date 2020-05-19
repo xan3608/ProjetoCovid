@@ -6,19 +6,22 @@ import java.net.URISyntaxException;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import projeto.covid.controler.auxilio.TelaMudanca;
+import projeto.covid.controler.auxilio.Telas;
+import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Brasil;
-import projeto.covid.modelo.GrupoEstados;
-import projeto.covid.modelo.GrupoMunicipios;
-import projeto.covid.modelo.recursos.DiretorioTemp;
+import projeto.covid.modelo.GrupoEstado;
+import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.recursos.planilha.LeituraPlanilha;
-import projeto.covid.modelo.recursos.planilha.Selenium;
+import projeto.covid.modelo.recursos.scraping.Selenium;
+import projeto.covid.modelo.recursos.temporario.DiretorioTemp;
 
 public class FXMLLoadingController implements TelaMudanca {
 
 	private Task<Void> tarefa;
 	private static Brasil brasil;
-	private static GrupoEstados grupoEstados;
-	private static GrupoMunicipios grupoMunicipios;
+	private static GrupoEstado grupoEstados;
+	private static GrupoMunicipio grupoMunicipios;
 
 	@FXML
 	private TextArea consoleLoading;
@@ -53,10 +56,10 @@ public class FXMLLoadingController implements TelaMudanca {
 				System.err.println("Carregando banco de dados");
 
 				brasil = new Brasil();
-				grupoEstados = new GrupoEstados();
-				grupoMunicipios = new GrupoMunicipios();
+				grupoEstados = new GrupoEstado();
+				grupoMunicipios = new GrupoMunicipio();
 
-				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20200518.xlsx");
+				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20200517.xlsx");
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
 				} catch (IOException e) {
@@ -85,11 +88,11 @@ public class FXMLLoadingController implements TelaMudanca {
 		return FXMLLoadingController.brasil;
 	}
 
-	public static GrupoEstados getGrupoEstados() {
+	public static GrupoEstado getGrupoEstados() {
 		return FXMLLoadingController.grupoEstados;
 	}
 
-	public static GrupoMunicipios getGrupoMunicipios() {
+	public static GrupoMunicipio getGrupoMunicipios() {
 		return FXMLLoadingController.grupoMunicipios;
 	}
 }

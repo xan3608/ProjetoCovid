@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import projeto.covid.controler.auxilio.TelaMudanca;
+import projeto.covid.controler.auxilio.Telas;
+import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Brasil;
 
 public class FXMLEstatisticaPaisController implements TelaMudanca {

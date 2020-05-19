@@ -1,4 +1,4 @@
-package projeto.covid.modelo.recursos.planilha;
+package projeto.covid.modelo.recursos.scraping;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import projeto.covid.modelo.recursos.DiretorioTemp;
+import projeto.covid.modelo.recursos.temporario.DiretorioTemp;
 
 public class Selenium {
 	private WebDriver driver;

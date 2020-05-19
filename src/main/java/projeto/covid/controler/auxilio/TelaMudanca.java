@@ -1,4 +1,4 @@
-package projeto.covid.controler;
+package projeto.covid.controler.auxilio;
 
 public interface TelaMudanca {
 
