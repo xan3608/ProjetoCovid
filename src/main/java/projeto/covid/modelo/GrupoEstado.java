@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GrupoEstado {
 	private List<Estado> grupoEstado;
-	
+
 	public GrupoEstado() {
 		this.grupoEstado = new ArrayList<Estado>();
 	}
@@ -26,7 +26,19 @@ public class GrupoEstado {
 		}
 		return null;
 	}
-	 @Override
+
+	public ArrayList<Estado> buscarVariosEstados(String nomeEstado) {
+		ArrayList<Estado> estadosEncontrados = new ArrayList<Estado>();
+
+		for (Estado estado : this.grupoEstado) {
+			if (estado.getEstado().contains(nomeEstado.trim().toUpperCase())) {
+				estadosEncontrados.add(estado);
+			}
+		}
+		return estadosEncontrados;
+	}
+
+	@Override
 	public String toString() {
 		return "Estados cadastrados: " + this.grupoEstado.size();
 	}

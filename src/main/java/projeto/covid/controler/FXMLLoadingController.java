@@ -43,6 +43,7 @@ public class FXMLLoadingController implements TelaMudanca {
 			protected Void call() throws Exception {
 
 				DiretorioTemp diretorio = new DiretorioTemp();
+				consoleLoading.appendText("Extraindo arquivos\n");
 //				try {
 //					diretorio.extrairParaTemp();
 //				} catch (IOException | URISyntaxException e) {
@@ -50,18 +51,20 @@ public class FXMLLoadingController implements TelaMudanca {
 //					System.out.println("Erro ao extrair para diretorio temporario");
 //				}
 //				Selenium selenium = new Selenium(diretorio);
+				consoleLoading.appendText("Baixando planilha\n");
 //				selenium.downloadDados();
 //				System.out.println(selenium.getDownloadName());
-
+				consoleLoading.appendText("Planilha baixada\n");
 				System.err.println("Carregando banco de dados");
 
 				brasil = new Brasil();
 				grupoEstados = new GrupoEstado();
 				grupoMunicipios = new GrupoMunicipio();
-
+				consoleLoading.appendText("Lendo dados da planilha...\n");
 				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20200517.xlsx");
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
+					consoleLoading.appendText("Dados lidos com sucesso!\n");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -72,12 +75,15 @@ public class FXMLLoadingController implements TelaMudanca {
 			@Override
 			protected void succeeded() {
 				System.err.println("Banco de dados carregado com sucesso");
+				consoleLoading.appendText("Banco de dados carregado com sucesso\n");
 				Principal.trocarTela(Telas.PRINCIPAL, "LOAD");
 			}
 
 			@Override
 			protected void failed() {
 				System.err.println("Falha ao carregar banco de dados");
+				consoleLoading.appendText("Falha ao carregar banco de dados\n");
+
 				Principal.trocarTela(Telas.PRINCIPAL, "LOAD");
 			}
 		};
