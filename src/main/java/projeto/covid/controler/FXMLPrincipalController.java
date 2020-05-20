@@ -5,13 +5,13 @@ import javafx.fxml.FXML;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Brasil;
+import projeto.covid.modelo.Pais;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 
 public class FXMLPrincipalController implements TelaMudanca {
 
-	private Brasil brasil;
+	private Pais brasil;
 	private GrupoEstado ge;
 	private GrupoMunicipio gm;
 

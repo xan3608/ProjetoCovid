@@ -19,7 +19,6 @@ public class Principal extends Application {
 	private static Scene sceneEstatisticaPais;
 	private static Scene sceneEstatisticaEstados;
 	private static Scene sceneEstatisticaMunicipios;
-
 	private static ArrayList<TelaMudanca> ouvintes = new ArrayList<>();
 
 	@Override

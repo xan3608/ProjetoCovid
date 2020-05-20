@@ -1,12 +1,12 @@
 package projeto.covid.modelo;
 
-public class Estado extends Brasil implements Comparable<Estado> {
-	private String estado, regiao;
+public class Estado extends Pais implements Comparable<Estado> {
+	private String nomeEstado, nomeRegiao;
 
 	public Estado(String estado, String regiao) {
 		super();
-		this.setEstado(estado);
-		this.setRegiao(regiao);
+		this.setNomeEstado(estado);
+		this.setNomeRegiao(regiao);
 	}
 
 	public Estado() {
@@ -15,36 +15,37 @@ public class Estado extends Brasil implements Comparable<Estado> {
 
 	@Override
 	public String toString() {
-		// return "Estado: " + this.estado + ", Regiao: " + this.regiao + ", Dados
-		// cadastrados: " + super.getGrupoDados().size();
-		return String.format("%-20s%-10s", this.regiao, this.estado);
-
-//		return this.regiao + " - " + this.estado;
-	}
-
-	public String getRegiao() {
-		return regiao;
-	}
-
-	public void setRegiao(String regiao) {
-		this.regiao = regiao.toUpperCase().trim();
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado.toUpperCase().trim();
+		return String.format("%-10s%-20s", this.nomeEstado, this.nomeRegiao);
 	}
 
 	@Override
 	public int compareTo(Estado e) {
-		if (this.regiao.compareToIgnoreCase(e.getRegiao()) != 0) {
+		if (this.nomeRegiao.compareToIgnoreCase(e.getNomeRegiao()) != 0) {
 			return 0;
 		} else {
-			return +this.estado.compareToIgnoreCase(e.getEstado());
+			return this.nomeEstado.compareToIgnoreCase(e.getNomeEstado());
 		}
+	}
+
+	@Override
+	public String getNome() {
+		return this.nomeEstado;
+	}
+
+	public String getNomeRegiao() {
+		return nomeRegiao;
+	}
+
+	public void setNomeRegiao(String regiao) {
+		this.nomeRegiao = regiao.toUpperCase().trim();
+	}
+
+	public String getNomeEstado() {
+		return nomeEstado;
+	}
+
+	public void setNomeEstado(String estado) {
+		this.nomeEstado = estado.toUpperCase().trim();
 	}
 
 }

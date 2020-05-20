@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Brasil;
+import projeto.covid.modelo.Pais;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.database.planilha.LeituraPlanilha;
@@ -20,7 +20,7 @@ import projeto.covid.modelo.database.temporario.DiretorioTemp;
 public class FXMLLoadingController implements TelaMudanca {
 
 	private Task<Void> tarefa;
-	private static Brasil brasil;
+	private static Pais brasil;
 	private static GrupoEstado grupoEstados;
 	private static GrupoMunicipio grupoMunicipios;
 
@@ -54,23 +54,25 @@ public class FXMLLoadingController implements TelaMudanca {
 //				}
 				
 				consoleLoading.appendText("Iniciando selenium\n");
-				Selenium selenium = new Selenium(diretorio);
+				//Selenium selenium = new Selenium(diretorio);
 				consoleLoading.appendText("Buscando dados do Ministerio da Saude\n");
-				selenium.downloadDados();
-				System.out.println(selenium.getDownloadName());
+				//selenium.downloadDados();
+				//System.out.println(selenium.getDownloadName());
 				consoleLoading.appendText("Dados obtidos com sucesso\n");
 				
 				consoleLoading.appendText("Carregando banco de dados\n");
-				brasil = new Brasil();
+				brasil = new Pais();
 				grupoEstados = new GrupoEstado();
 				grupoMunicipios = new GrupoMunicipio();
 				consoleLoading.appendText("Lendo dados da planilha...\n");
-				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
+				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
+				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_19mai2020.xlsx");
+
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
 					consoleLoading.appendText("Dados lidos com sucesso\n");
-					Collections.sort(grupoEstados.getGrupoEstado());
-					Collections.sort(grupoMunicipios.getGrupoMunicipios());
+					grupoEstados.getGrupo().sort(null);
+					grupoMunicipios.getGrupo().sort(null);
 					consoleLoading.appendText("Banco de dados carregado com sucesso\n");
 				} catch (IOException e) {
 					consoleLoading.appendText("Erro ao ler dados\n");
@@ -96,7 +98,7 @@ public class FXMLLoadingController implements TelaMudanca {
 		return tarefa;
 	}
 
-	public static Brasil getBrasil() {
+	public static Pais getBrasil() {
 		return FXMLLoadingController.brasil;
 	}
 

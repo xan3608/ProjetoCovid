@@ -10,16 +10,18 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import projeto.covid.controler.auxilio.Filtro;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Municipio;
+import projeto.covid.modelo.Nacao;
 
 public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 
 	@FXML
-	private ListView<Municipio> lvMunicipios;
+	private ListView<Nacao> lvMunicipios;
 	@FXML
 	private TextField txFiltroMunicipio;
 
@@ -43,25 +45,14 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 		} else {
 			System.out.println(lvMunicipios.getSelectionModel().getSelectedItem());
 			// futura tela
-			// Principal.trocarTela(null, lvMunicipios.getSelectionModel().getSelectedItem());
+			// Principal.trocarTela(null,
+			// lvMunicipios.getSelectionModel().getSelectedItem());
 		}
 	}
 
 	@FXML
 	private void filtroMunicipios(KeyEvent event) {
-
-		if (event.getCode() == KeyCode.BACK_SPACE && txFiltroMunicipio.getLength() != 0) {
-			txFiltroMunicipio.setText(txFiltroMunicipio.getText(0, (txFiltroMunicipio.getLength() - 1)));
-		} else {
-			txFiltroMunicipio.setText(txFiltroMunicipio.getText() + event.getText());
-		}
-
-		if (txFiltroMunicipio.getText().isEmpty()) {
-			carregarMunicipios(grupoMunicipios.getGrupoMunicipios());
-			return;
-		}
-
-		carregarMunicipios(grupoMunicipios.buscarVariosMunicipios(txFiltroMunicipio.getText()));
+		carregarMunicipios(Filtro.filtrarGrupo(grupoMunicipios, event, txFiltroMunicipio));
 	}
 
 	@FXML
@@ -74,14 +65,14 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 		if (novaTela.equals(Telas.ESTATISTICA_MUNICIPIOS)) {
 			this.grupoMunicipios = (GrupoMunicipio) dados;
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + grupoMunicipios);
-			carregarMunicipios(grupoMunicipios.getGrupoMunicipios());
+			carregarMunicipios(grupoMunicipios.getGrupo());
 		}
 
 	}
 
-	private void carregarMunicipios(List<Municipio> listaMunicipios) {
+	private void carregarMunicipios(List<Nacao> listaMunicipios) {
 		lvMunicipios.getItems().clear();
-		for (Municipio municipio : listaMunicipios) {
+		for (Nacao municipio : listaMunicipios) {
 			lvMunicipios.getItems().add(municipio);
 		}
 	}

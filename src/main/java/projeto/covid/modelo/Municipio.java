@@ -1,7 +1,7 @@
 package projeto.covid.modelo;
 
 public class Municipio extends Estado {
-	private String municipio, regiaoSaude;
+	private String nomeMunicipio, nomeRegiaoSaude;
 
 	public Municipio() {
 		super();
@@ -15,24 +15,32 @@ public class Municipio extends Estado {
 
 	@Override
 	public String toString() {
-//		return "Municipio: " + this.municipio + ", RegiaoSaude: " + this.regiaoSaude + ", " + super.toString();
-		return String.format("%-20s%-10s", super.getEstado(), this.municipio);
-//		return super.getEstado() + " - " +  this.municipio;
+		return String.format("%-30s%-10s", this.nomeMunicipio, super.getNomeEstado());
 	}
-	
+
+	@Override
+	public String getNome() {
+		return this.nomeMunicipio;
+	}
+
+	@Override
+	public int compareTo(Estado e) {
+		return this.nomeMunicipio.compareTo(e.getNome());
+	}
+
 	public String getMunicipio() {
-		return municipio;
+		return nomeMunicipio;
 	}
 
 	public void setMunicipio(String municipio) {
-		this.municipio = municipio.toUpperCase().trim();
+		this.nomeMunicipio = municipio.toUpperCase().trim();
 	}
 
 	public String getRegiaoSaude() {
-		return regiaoSaude;
+		return nomeRegiaoSaude;
 	}
 
 	public void setRegiaoSaude(String regiaoSaude) {
-		this.regiaoSaude = regiaoSaude.toUpperCase().trim();
+		this.nomeRegiaoSaude = regiaoSaude.toUpperCase().trim();
 	}
 }

@@ -13,7 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import projeto.covid.modelo.Brasil;
+import projeto.covid.modelo.Pais;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
@@ -25,7 +25,7 @@ public class LeituraPlanilha {
 		this.arquivoPath = diretorio.getBrowserDownload().resolve(arquivoNome).toAbsolutePath();
 	}
 
-	public void lerDados(Brasil brasil, GrupoEstado GrupoEstados, GrupoMunicipio GrupoMunicipios) throws IOException {
+	public void lerDados(Pais brasil, GrupoEstado GrupoEstados, GrupoMunicipio GrupoMunicipios) throws IOException {
 		File arquivo = this.arquivoPath.toFile();
 		FileInputStream fis = new FileInputStream(arquivo);
 		XSSFWorkbook planilha = new XSSFWorkbook(fis);
@@ -95,7 +95,7 @@ public class LeituraPlanilha {
 				}
 				dadosDasLinhas.add(linhaGenerica);
 			} catch (Exception e) {
-				System.err.println("Falha ao ler a coluna na linha: " + linha);
+				System.err.println("Falha ao ler a coluna na linha: " + linhaind);
 			}
 			linhaind++;
 		}

@@ -7,11 +7,11 @@ import javafx.scene.control.Alert.AlertType;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Brasil;
+import projeto.covid.modelo.Pais;
 
 public class FXMLEstatisticaPaisController implements TelaMudanca {
 
-	private Brasil brasil;
+	private Pais brasil;
 
 	@FXML
 	protected void botaoVoltar(ActionEvent event) {
@@ -39,7 +39,7 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_PAIS)) {
-			brasil = (Brasil) dados;
+			brasil = (Pais) dados;
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + brasil);
 		}
 	}

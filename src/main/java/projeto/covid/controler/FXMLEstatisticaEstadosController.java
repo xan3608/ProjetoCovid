@@ -10,16 +10,17 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import projeto.covid.controler.auxilio.Filtro;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Estado;
 import projeto.covid.modelo.GrupoEstado;
+import projeto.covid.modelo.Nacao;
 
 public class FXMLEstatisticaEstadosController implements TelaMudanca {
 
 	@FXML
-	private ListView<Estado> lvEstados;
+	private ListView<Nacao> lvEstados;
 	@FXML
 	private TextField txFiltroEstado;
 
@@ -49,19 +50,7 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 
 	@FXML
 	private void filtroEstado(KeyEvent event) {
-
-		if (event.getCode() == KeyCode.BACK_SPACE && txFiltroEstado.getLength() != 0) {
-			txFiltroEstado.setText(txFiltroEstado.getText(0, (txFiltroEstado.getLength() - 1)));
-		} else {
-			txFiltroEstado.setText(txFiltroEstado.getText() + event.getText());
-		}
-
-		if (txFiltroEstado.getText().isEmpty()) {
-			carregarEstados(grupoEstados.getGrupoEstado());
-			return;
-		}
-
-		carregarEstados(grupoEstados.buscarVariosEstados(txFiltroEstado.getText()));
+		carregarEstados(Filtro.filtrarGrupo(grupoEstados, event, txFiltroEstado));
 	}
 
 	@FXML
@@ -74,13 +63,13 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 		if (novaTela.equals(Telas.ESTATISTICA_ESTADO)) {
 			this.grupoEstados = (GrupoEstado) dados;
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + grupoEstados);
-			carregarEstados(grupoEstados.getGrupoEstado());
+			carregarEstados(grupoEstados.getGrupo());
 		}
 	}
 
-	public void carregarEstados(List<Estado> listaEstados) {
+	public void carregarEstados(List<Nacao> listaEstados) {
 		lvEstados.getItems().clear();
-		for (Estado estado : listaEstados) {
+		for (Nacao estado : listaEstados) {
 			lvEstados.getItems().add(estado);
 		}
 	}
