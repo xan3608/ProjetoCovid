@@ -31,10 +31,12 @@ public class LeituraPlanilha {
 		XSSFWorkbook planilha = new XSSFWorkbook(fis);
 		XSSFSheet pagina = planilha.getSheetAt(0);
 		List<DadosDaLinha> dadosDasLinhas = new ArrayList<DadosDaLinha>();
-
+		System.out.println("Lendo planilha");
 		lerDadosPagina(pagina, dadosDasLinhas);
 		planilha.close();
+		System.out.println("Organizando Planilha");
 		OrganizaDadosDaPlanilha.organizarDados(dadosDasLinhas, brasil, GrupoEstados, GrupoMunicipios);
+		System.out.println("Terminei de organizar");
 	}
 
 	private void lerDadosPagina(XSSFSheet pagina, List<DadosDaLinha> dadosDasLinhas) {
@@ -62,6 +64,9 @@ public class LeituraPlanilha {
 					case 2: { // municipio
 						linhaGenerica.setMunicipio(celulaString(celula));
 						break;
+					}
+					case 4: { // codMunicipio 
+						linhaGenerica.setCodMunicipio(celulaNumerica(celula));
 					}
 					case 6: { // RegiaoSaude
 						linhaGenerica.setRegiaoSaude(celulaString(celula));

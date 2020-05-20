@@ -37,7 +37,7 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
 
 	@FXML
 	protected void botaoGrafico(ActionEvent event) {
-		
+		Principal.trocarTela(Telas.GRAFICOS, brasil);
 	}
 
 	@FXML

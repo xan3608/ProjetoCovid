@@ -43,7 +43,7 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 		} else {
 			System.out.println(lvEstados.getSelectionModel().getSelectedItem());
 			// futura tela
-			// Principal.trocarTela(null, lvEstados.getSelectionModel().getSelectedItem());
+			Principal.trocarTela(Telas.GRAFICOS, lvEstados.getSelectionModel().getSelectedItem());
 		}
 	}
 

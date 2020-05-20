@@ -19,6 +19,7 @@ public class Principal extends Application {
 	private static Scene sceneEstatisticaPais;
 	private static Scene sceneEstatisticaEstados;
 	private static Scene sceneEstatisticaMunicipios;
+	private static Scene sceneGraficos;
 	private static ArrayList<TelaMudanca> ouvintes = new ArrayList<>();
 
 	@Override
@@ -37,13 +38,15 @@ public class Principal extends Application {
 					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaEstados.fxml"));
 			Parent fxmlEstatisticaMunicipios = FXMLLoader
 					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaMunicipios.fxml"));
+			Parent fxmlGraficos = FXMLLoader
+					.load(getClass().getResource("../../visualizacao/FXMLGraficos.fxml"));
 
 			sceneLoading = new Scene(fxmlLoading);
 			scenePrincipal = new Scene(fxmlPrincipal);
 			sceneEstatisticaPais = new Scene(fxmlEstatisticaPais);
 			sceneEstatisticaEstados = new Scene(fxmlEstatisticaEstados);
 			sceneEstatisticaMunicipios = new Scene(fxmlEstatisticaMunicipios);
-
+			sceneGraficos = new Scene(fxmlGraficos);
 			stage.setScene(sceneLoading);
 			stage.show();
 		} catch (Exception e) {
@@ -79,6 +82,11 @@ public class Principal extends Application {
 		case 4:
 			stage.setTitle("Projeto Covid-19 - Estatisticas nos Municipios");
 			stage.setScene(sceneEstatisticaMunicipios);
+			notificarTodosOuvintes(tela, dados);
+			break;
+		case 5:
+			stage.setTitle("Projeto Covid - 19 - Graficos");
+			stage.setScene(sceneGraficos);
 			notificarTodosOuvintes(tela, dados);
 			break;
 		}

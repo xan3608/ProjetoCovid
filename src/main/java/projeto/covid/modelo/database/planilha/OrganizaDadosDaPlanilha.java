@@ -16,7 +16,8 @@ public class OrganizaDadosDaPlanilha {
 		for (DadosDaLinha linha : dados) {
 			if (linha.getRegiao().equalsIgnoreCase("Brasil")) {
 				brasil.setDados(linha.getDados());
-			} else if (linha.getMunicipio() == null || linha.getMunicipio().isEmpty()) {
+			} else if ((linha.getMunicipio() == null || linha.getMunicipio().isEmpty()) &&
+						linha.getCodMunicipio() == null || linha.getCodMunicipio() <= 0) {
 				Estado estado = grupoEstados.buscarEstado(linha.getEstado());
 				if (estado != null) {
 					estado.setDados(linha.getDados());
