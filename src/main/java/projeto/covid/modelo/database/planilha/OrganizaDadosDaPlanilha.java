@@ -26,7 +26,7 @@ public class OrganizaDadosDaPlanilha {
 			}
 			return;
 		}
-		if (linha.getMunicipio().trim().isEmpty()) {
+		if (linha.getMunicipio() == null || linha.getMunicipio().trim().isEmpty()) {
 			return;
 		}
 

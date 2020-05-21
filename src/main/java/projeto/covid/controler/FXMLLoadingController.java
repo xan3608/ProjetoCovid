@@ -66,6 +66,7 @@ public class FXMLLoadingController implements TelaMudanca {
 				grupoMunicipios = new GrupoMunicipio();
 				consoleLoading.appendText("Lendo dados da planilha...\n");
 				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
+				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_19mai2020.xlsx");
 				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20mai2020.xlsx");
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);

@@ -37,46 +37,57 @@ public class FXMLGraficosControlador implements TelaMudanca {
 
 	@FXML
 	private void botaoVoltar(ActionEvent event) {
+		this.lineChart.getData().clear();
+		Runtime.getRuntime().gc();
 		Principal.trocarTela(Telas.PRINCIPAL);
 	}
 
 	@FXML
 	private void botaoCasos(ActionEvent event) {
 		List<Series<String, Number>> series = new ArrayList<XYChart.Series<String, Number>>();
-		series.add(DadosGraficos.seriesCasosNovos(entidade.getDados()));
 		series.add(DadosGraficos.seriesCasosAcumulados(entidade.getDados()));
-		setInformacoesGraficos("Casos novos e acumulados de COVID-19 por data de notificação",
+		series.add(DadosGraficos.seriesCasosNovos(entidade.getDados()));
+		configuracoesGraficos("Casos novos e acumulados de COVID-19 por data de notificação",
 								"Data da Notificacao", "Casos");
 		gerarGraficos(series);
 	}
 
 	@FXML
 	void botaoCasosAcumulados(ActionEvent event) {
-		setInformacoesGraficos("Casos acumulados de COVID-19 por data de notificação",
-				"Data da Notificacao", "Casos");
+		configuracoesGraficos("Casos acumulados de COVID-19 por data de notificação",
+				"Data da Notificacao", "Casos Acumulados");
 		gerarGraficos(DadosGraficos.seriesCasosAcumulados(entidade.getDados()));
 	}
 
 	@FXML
 	void botaoCasosNovos(ActionEvent event) {
-		setInformacoesGraficos("Casos novos de COVID-19 por data de notificação",
+		configuracoesGraficos("Casos novos de COVID-19 por data de notificação",
 				"Data da Notificacao", "Casos");
 		gerarGraficos(DadosGraficos.seriesCasosNovos(entidade.getDados()));
 	}
 	
     @FXML
     void botaoObitos(ActionEvent event) {
-
+		List<Series<String, Number>> series = new ArrayList<XYChart.Series<String, Number>>();
+		series.add(DadosGraficos.seriesObitosAcumulados(entidade.getDados()));
+		series.add(DadosGraficos.seriesObitosNovos(entidade.getDados()));
+		configuracoesGraficos("Obitos novos e acumulados de COVID-19 por data de notificação",
+								"Data da Notificacao", "Obitos");
+		gerarGraficos(series);
     }
 
     @FXML
     void botaoObitosAcumulados(ActionEvent event) {
-
+    	configuracoesGraficos("Obitos acumulados de COVID-19 por data de notificação",
+				"Data da Notificacao", "Obitos Acumulados");
+		gerarGraficos(DadosGraficos.seriesObitosAcumulados(entidade.getDados()));
     }
 
     @FXML
     void botaoObitosNovos(ActionEvent event) {
-
+    	configuracoesGraficos("Obitos novos de COVID-19 por data de notificação",
+				"Data da Notificacao", "Casos");
+		gerarGraficos(DadosGraficos.seriesObitosNovos(entidade.getDados()));
     }
 
 	@Override
@@ -88,21 +99,21 @@ public class FXMLGraficosControlador implements TelaMudanca {
 		}
 	}
 
-	private void setInformacoesGraficos(String titulo, String eixoX, String eixoY) {
+	private void configuracoesGraficos(String titulo, String eixoX, String eixoY) {
 		this.lineChart.setTitle(titulo + " - " + entidade.getNome());
+		this.lineChart.setAnimated(true);
 		this.xAxis.setLabel(eixoX);
 		this.yAxis.setLabel(eixoY);
+		this.xAxis.setAnimated(false);
 	}
 
 	private void gerarGraficos(Series<String, Number> series) {
 		this.lineChart.getData().clear();
 		this.lineChart.getData().add(series);
-		System.out.println("graph data: " + lineChart.getData().size());
 	}
 
 	private void gerarGraficos(List<Series<String, Number>> series) {
 		this.lineChart.getData().clear();
 		this.lineChart.setData(FXCollections.observableArrayList(series));
-		System.out.println("graph data: " + lineChart.getData().size());
 	}
 }
