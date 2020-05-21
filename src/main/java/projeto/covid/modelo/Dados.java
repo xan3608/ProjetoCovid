@@ -24,7 +24,7 @@ public class Dados {
 	}
 
 	public String getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(String data) {
@@ -32,7 +32,7 @@ public class Dados {
 	}
 
 	public Integer getPopulacao() {
-		return populacao;
+		return this.populacao;
 	}
 
 	public void setPopulacao(Integer populacao) {
@@ -40,7 +40,7 @@ public class Dados {
 	}
 
 	public Integer getSemanaEpidemia() {
-		return semanaEpidemia;
+		return this.semanaEpidemia;
 	}
 
 	public void setSemanaEpidemia(Integer semanaEpidemia) {
@@ -48,7 +48,7 @@ public class Dados {
 	}
 
 	public Integer getCasosAcumulados() {
-		return casosAcumulados;
+		return this.casosAcumulados;
 	}
 
 	public void setCasosAcumulados(Integer casosAcumulados) {
@@ -56,7 +56,7 @@ public class Dados {
 	}
 
 	public Integer getObitosAcumulados() {
-		return obitosAcumulados;
+		return this.obitosAcumulados;
 	}
 
 	public void setObitosAcumulados(Integer obitosAcumulados) {

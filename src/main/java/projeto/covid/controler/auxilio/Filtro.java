@@ -5,8 +5,8 @@ import java.util.List;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import projeto.covid.modelo.Grupo;
-import projeto.covid.modelo.Nacao;
+import projeto.covid.modelo.auxilio.Grupo;
+import projeto.covid.modelo.auxilio.Nacao;
 
 public class Filtro {
 	public static List<Nacao> filtrarGrupo(Grupo grupo, KeyEvent Keyevent, TextField campo) {

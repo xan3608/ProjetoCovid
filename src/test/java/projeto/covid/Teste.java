@@ -3,22 +3,18 @@ package projeto.covid;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.Dados;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
-import projeto.covid.modelo.Municipio;
-import projeto.covid.modelo.database.planilha.LeituraPlanilha;
-import projeto.covid.modelo.database.scraping.Selenium;
+import projeto.covid.modelo.Pais;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class Teste {
 	public static void main(String[] args) throws IOException, URISyntaxException {
-		DiretorioTemp diretorio = new DiretorioTemp();
-		//diretorio.extrairParaTemp();
-		Pais brasil = new Pais();
-		GrupoEstado e = new GrupoEstado();
-		GrupoMunicipio m = new GrupoMunicipio();
+//		DiretorioTemp diretorio = new DiretorioTemp();
+//		//diretorio.extrairParaTemp();
+//		Pais brasil = new Pais();
+//		GrupoEstado e = new GrupoEstado();
+//		GrupoMunicipio m = new GrupoMunicipio();
 //		//Selenium selenium = new Selenium(diretorio);
 //		try{
 //			//selenium.downloadDados();

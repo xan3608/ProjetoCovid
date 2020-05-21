@@ -3,6 +3,7 @@ package projeto.covid.controler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -13,8 +14,8 @@ import javafx.scene.chart.XYChart.Series;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Nacao;
-import projeto.covid.visualizacao.DadosGraficos;
+import projeto.covid.modelo.auxilio.DadosGraficos;
+import projeto.covid.modelo.auxilio.Nacao;
 
 public class FXMLGraficosControlador implements TelaMudanca {
 
@@ -62,6 +63,7 @@ public class FXMLGraficosControlador implements TelaMudanca {
 				"Data da Notificacao", "Casos");
 		gerarGraficos(DadosGraficos.seriesCasosNovos(entidade.getDados()));
 	}
+	
     @FXML
     void botaoObitos(ActionEvent event) {
 
@@ -80,7 +82,7 @@ public class FXMLGraficosControlador implements TelaMudanca {
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.GRAFICOS)) {
-			entidade = (Nacao) dados;
+			this.entidade = (Nacao) dados;
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + entidade);
 			botaoCasos(null);
 		}
@@ -88,20 +90,19 @@ public class FXMLGraficosControlador implements TelaMudanca {
 
 	private void setInformacoesGraficos(String titulo, String eixoX, String eixoY) {
 		this.lineChart.setTitle(titulo + " - " + entidade.getNome());
-		xAxis.setLabel(eixoX);
-		yAxis.setLabel(eixoY);
+		this.xAxis.setLabel(eixoX);
+		this.yAxis.setLabel(eixoY);
 	}
 
 	private void gerarGraficos(Series<String, Number> series) {
 		this.lineChart.getData().clear();
-		lineChart.getData().add(series);
-		System.out.println("graph data" + lineChart.getData().size());
+		this.lineChart.getData().add(series);
+		System.out.println("graph data: " + lineChart.getData().size());
 	}
 
 	private void gerarGraficos(List<Series<String, Number>> series) {
 		this.lineChart.getData().clear();
-		for (Series<String, Number> serie : series) {
-			this.lineChart.getData().add(serie);
-		}
+		this.lineChart.setData(FXCollections.observableArrayList(series));
+		System.out.println("graph data: " + lineChart.getData().size());
 	}
 }

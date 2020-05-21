@@ -1,4 +1,4 @@
-package projeto.covid.modelo;
+package projeto.covid.modelo.auxilio;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class Grupo {
 	private List<Nacao> grupo;
 
-	Grupo() {
+	protected Grupo() {
 		this.grupo = new ArrayList<Nacao>();
 	}
 
@@ -33,7 +33,7 @@ public abstract class Grupo {
 		return elementosEncontrados;
 	}
 
-	private boolean containsIgnoreAccents(String a, String b) {
+	public boolean containsIgnoreAccents(String a, String b) {
 		String input1 = Normalizer.normalize(a, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
 				.toLowerCase();
 

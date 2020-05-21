@@ -47,6 +47,7 @@ public class Principal extends Application {
 			sceneEstatisticaEstados = new Scene(fxmlEstatisticaEstados);
 			sceneEstatisticaMunicipios = new Scene(fxmlEstatisticaMunicipios);
 			sceneGraficos = new Scene(fxmlGraficos);
+			
 			stage.setScene(sceneLoading);
 			stage.show();
 		} catch (Exception e) {

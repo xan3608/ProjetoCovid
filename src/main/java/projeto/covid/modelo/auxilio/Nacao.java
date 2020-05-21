@@ -1,6 +1,8 @@
-package projeto.covid.modelo;
+package projeto.covid.modelo.auxilio;
 
 import java.util.List;
+
+import projeto.covid.modelo.Dados;
 
 public abstract class Nacao {
 	public abstract List<Dados> getDados();

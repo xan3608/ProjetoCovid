@@ -2,6 +2,7 @@ package projeto.covid.controler;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,7 +15,7 @@ import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.GrupoMunicipio;
-import projeto.covid.modelo.Nacao;
+import projeto.covid.modelo.auxilio.Nacao;
 
 public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 
@@ -33,7 +34,7 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 	@FXML
 	private void botaoSelecionar(ActionEvent event) {
 
-		if (lvMunicipios.getSelectionModel().getSelectedItem() == null) {
+		if (this.lvMunicipios.getSelectionModel().getSelectedItem() == null) {
 			Alert alertaSelecao = new Alert(AlertType.WARNING);
 			alertaSelecao.setTitle("Alerta - Estatisticas nos Municipios");
 			alertaSelecao.setHeaderText("Erro ao abrir estatistica");
@@ -41,15 +42,14 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 			alertaSelecao.showAndWait();
 
 		} else {
-			System.out.println(lvMunicipios.getSelectionModel().getSelectedItem());
-			// futura tela
-			Principal.trocarTela(Telas.GRAFICOS, lvMunicipios.getSelectionModel().getSelectedItem());
+			System.out.println(this.lvMunicipios.getSelectionModel().getSelectedItem());
+			Principal.trocarTela(Telas.GRAFICOS, this.lvMunicipios.getSelectionModel().getSelectedItem());
 		}
 	}
 
 	@FXML
 	private void filtroMunicipios(KeyEvent event) {
-		carregarMunicipios(Filtro.filtrarGrupo(grupoMunicipios, event, txFiltroMunicipio));
+		carregarMunicipios(Filtro.filtrarGrupo(this.grupoMunicipios, event, this.txFiltroMunicipio));
 	}
 
 	@FXML
@@ -61,17 +61,15 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_MUNICIPIOS)) {
 			this.grupoMunicipios = (GrupoMunicipio) dados;
-			System.out.println("Nova Tela: " + novaTela + ", Dados: " + grupoMunicipios);
-			carregarMunicipios(grupoMunicipios.getGrupo());
+			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.grupoMunicipios);
+			carregarMunicipios(this.grupoMunicipios.getGrupo());
 		}
 
 	}
 
 	private void carregarMunicipios(List<Nacao> listaMunicipios) {
-		lvMunicipios.getItems().clear();
-		for (Nacao municipio : listaMunicipios) {
-			lvMunicipios.getItems().add(municipio);
-		}
+		this.lvMunicipios.getItems().clear();
+		this.lvMunicipios.setItems(FXCollections.observableArrayList(listaMunicipios));
 	}
 
 }

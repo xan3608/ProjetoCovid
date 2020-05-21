@@ -20,16 +20,16 @@ public class Municipio extends Estado {
 
 	@Override
 	public String getNome() {
-		return this.nomeMunicipio;
+		return getMunicipio();
 	}
 
 	@Override
 	public int compareTo(Estado e) {
-		return this.nomeMunicipio.compareTo(e.getNome());
+		return this.nomeMunicipio.compareToIgnoreCase(e.getNome());
 	}
 
 	public String getMunicipio() {
-		return nomeMunicipio;
+		return this.nomeMunicipio;
 	}
 
 	public void setMunicipio(String municipio) {
@@ -37,7 +37,7 @@ public class Municipio extends Estado {
 	}
 
 	public String getRegiaoSaude() {
-		return nomeRegiaoSaude;
+		return this.nomeRegiaoSaude;
 	}
 
 	public void setRegiaoSaude(String regiaoSaude) {

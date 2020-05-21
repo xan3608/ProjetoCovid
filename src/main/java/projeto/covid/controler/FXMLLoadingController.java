@@ -35,7 +35,7 @@ public class FXMLLoadingController implements TelaMudanca {
 	public void mudouTela(Telas novaTela, Object dados) {}
 
 	private Task<Void> criarTarefa() {
-		tarefa = new Task<Void>() {
+		this.tarefa = new Task<Void>() {
 
 			@Override
 			protected Void call() throws Exception {
@@ -44,9 +44,9 @@ public class FXMLLoadingController implements TelaMudanca {
 				consoleLoading.appendText("Extraindo arquivos\n");
 //				try {
 //					diretorio.extrairParaTemp();
-					consoleLoading.appendText("Arquivos extraidos com sucesso\n");
+//					consoleLoading.appendText("Arquivos extraidos com sucesso\n");
 //				} catch (IOException | URISyntaxException e) {
-					consoleLoading.appendText("Erro ao extrair arquivos\n");
+//					consoleLoading.appendText("Erro ao extrair arquivos\n");
 //					e.printStackTrace();
 //				}
 				
@@ -58,12 +58,12 @@ public class FXMLLoadingController implements TelaMudanca {
 				consoleLoading.appendText("Dados obtidos com sucesso\n");
 				
 				consoleLoading.appendText("Carregando banco de dados\n");
-				brasil = new Pais();
+				brasil = new Pais("Brasil");
 				grupoEstados = new GrupoEstado();
 				grupoMunicipios = new GrupoMunicipio();
 				consoleLoading.appendText("Lendo dados da planilha...\n");
 				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
-				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_19mai2020.xlsx");
+				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20mai2020.xlsx");
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
 					consoleLoading.appendText("Dados lidos com sucesso\n");
@@ -91,7 +91,7 @@ public class FXMLLoadingController implements TelaMudanca {
 				Principal.trocarTela(Telas.PRINCIPAL, "LOAD");
 			}
 		};
-		return tarefa;
+		return this.tarefa;
 	}
 
 	public static Pais getBrasil() {

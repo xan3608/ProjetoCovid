@@ -3,11 +3,13 @@ package projeto.covid.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import projeto.covid.modelo.auxilio.Nacao;
+
 public class Pais extends Nacao {
 	private List<Dados> dados;
 	private String nomePais;
 
-	public Pais() {
+	Pais() {
 		this.dados = new ArrayList<Dados>();
 	}
 
@@ -28,7 +30,7 @@ public class Pais extends Nacao {
 
 	@Override
 	public String getNome() {
-		return this.nomePais;
+		return getNomePais();
 	}
 
 	@Override
@@ -42,11 +44,11 @@ public class Pais extends Nacao {
 	}
 
 	public String getNomePais() {
-		return nomePais;
+		return this.nomePais;
 	}
 
 	public void setNomePais(String nomePais) {
-		this.nomePais = nomePais;
+		this.nomePais = nomePais.toUpperCase().trim();
 	}
 
 }

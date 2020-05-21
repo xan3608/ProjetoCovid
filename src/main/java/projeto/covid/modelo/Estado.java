@@ -7,6 +7,8 @@ public class Estado extends Pais implements Comparable<Estado> {
 		super();
 		this.setNomeEstado(estado);
 		this.setNomeRegiao(regiao);
+		
+		
 	}
 
 	public Estado() {
@@ -29,11 +31,11 @@ public class Estado extends Pais implements Comparable<Estado> {
 
 	@Override
 	public String getNome() {
-		return this.nomeEstado;
+		return getNomeEstado();
 	}
 
 	public String getNomeRegiao() {
-		return nomeRegiao;
+		return this.nomeRegiao;
 	}
 
 	public void setNomeRegiao(String regiao) {
@@ -41,7 +43,7 @@ public class Estado extends Pais implements Comparable<Estado> {
 	}
 
 	public String getNomeEstado() {
-		return nomeEstado;
+		return this.nomeEstado;
 	}
 
 	public void setNomeEstado(String estado) {

@@ -1,4 +1,4 @@
-package projeto.covid.visualizacao;
+package projeto.covid.modelo.auxilio;
 
 import java.util.List;
 

@@ -44,24 +44,24 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
 	public void initialize() {
 		Principal.addTelaMudanca(this);
 		
-		colData.setCellValueFactory(new PropertyValueFactory<>("data"));
-		colPopulacao.setCellValueFactory(new PropertyValueFactory<>("populacao"));
-		colSemana.setCellValueFactory(new PropertyValueFactory<>("semanaEpidemia"));
-		colCasos.setCellValueFactory(new PropertyValueFactory<>("casosAcumulados"));
-		colObito.setCellValueFactory(new PropertyValueFactory<>("obitosAcumulados"));
+		this.colData.setCellValueFactory(new PropertyValueFactory<>("data"));
+		this.colPopulacao.setCellValueFactory(new PropertyValueFactory<>("populacao"));
+		this.colSemana.setCellValueFactory(new PropertyValueFactory<>("semanaEpidemia"));
+		this.colCasos.setCellValueFactory(new PropertyValueFactory<>("casosAcumulados"));
+		this.colObito.setCellValueFactory(new PropertyValueFactory<>("obitosAcumulados"));
 	}
 
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_PAIS)) {
-			brasil = (Pais) dados;
-			System.out.println("Nova Tela: " + novaTela + ", Dados: " + brasil);
+			this.brasil = (Pais) dados;
+			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.brasil);
 			povoarTabela();
 		}
 	}
 	
 	private void povoarTabela() {
-		tvBrasil.setItems(FXCollections.observableArrayList(brasil.getDados()));
+		this.tvBrasil.setItems(FXCollections.observableArrayList(this.brasil.getDados()));
 	}
 
 }
