@@ -14,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import projeto.covid.modelo.Pais;
+import projeto.covid.modelo.auxilio.Grupo;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
@@ -25,30 +26,26 @@ public class LeituraPlanilha {
 		this.arquivoPath = diretorio.getBrowserDownload().resolve(arquivoNome).toAbsolutePath();
 	}
 
-	public void lerDados(Pais brasil, GrupoEstado GrupoEstados, GrupoMunicipio GrupoMunicipios) throws IOException {
+	public void lerDados(Pais pais, GrupoEstado estados, GrupoMunicipio municipios) throws IOException {
 		File arquivo = this.arquivoPath.toFile();
 		FileInputStream fis = new FileInputStream(arquivo);
 		XSSFWorkbook planilha = new XSSFWorkbook(fis);
 		XSSFSheet pagina = planilha.getSheetAt(0);
-		List<DadosDaLinha> dadosDasLinhas = new ArrayList<DadosDaLinha>();
-		System.out.println("Lendo planilha");
-		lerDadosPagina(pagina, dadosDasLinhas);
+		lerDadosPagina(pagina, pais, estados, municipios);
 		planilha.close();
-		System.out.println("Organizando Planilha");
-		OrganizaDadosDaPlanilha.organizarDados(dadosDasLinhas, brasil, GrupoEstados, GrupoMunicipios);
-		System.out.println("Terminei de organizar");
+		fis.close();
+		planilha = null;
 	}
 
-	private void lerDadosPagina(XSSFSheet pagina, List<DadosDaLinha> dadosDasLinhas) {
+	private void lerDadosPagina(XSSFSheet pagina, Pais pais, GrupoEstado estados, GrupoMunicipio municipios) {
 		Iterator<Row> linhasIterator = pagina.iterator();
-
-		linhasIterator.next(); // pula cabeçalho
 		int linhaind = 1;
+
+		linhasIterator.next(); // pula cabeçalho		
 		while (linhasIterator.hasNext()) {
 			Row linha = linhasIterator.next();
 			Iterator<Cell> celulasIterator = linha.iterator();
-			DadosDaLinha linhaGenerica = new DadosDaLinha();
-			// System.out.println("linha : " + linhaind);
+			DadosDaLinha linhaGenerica = new DadosDaLinha(linhaind);
 			try {
 				while (celulasIterator.hasNext()) {
 					Cell celula = celulasIterator.next();
@@ -65,7 +62,7 @@ public class LeituraPlanilha {
 						linhaGenerica.setMunicipio(celulaString(celula));
 						break;
 					}
-					case 4: { // codMunicipio 
+					case 4: { // codMunicipio
 						linhaGenerica.setCodMunicipio(celulaNumerica(celula));
 					}
 					case 6: { // RegiaoSaude
@@ -73,12 +70,10 @@ public class LeituraPlanilha {
 						break;
 					}
 					case 7: { // data
-						// System.out.println("data: '" + celula.getStringCellValue() + "'");
 						linhaGenerica.getDados().setData(celulaString(celula));
 						break;
 					}
 					case 8: { // SemanaEpidemia
-						// System.out.println("Semana Epidemia: '" + celula.getStringCellValue() + "'");
 						linhaGenerica.getDados().setSemanaEpidemia(celulaNumerica(celula));
 						break;
 					}
@@ -87,20 +82,19 @@ public class LeituraPlanilha {
 						break;
 					}
 					case 10: { // casosAcumulados
-						linhaGenerica.getDados()
-								.setCasosAcumulados(celulaNumerica(celula));
+						linhaGenerica.getDados().setCasosAcumulados(celulaNumerica(celula));
 						break;
 					}
 					case 11: { // obitosAcumulados
-						linhaGenerica.getDados()
-								.setObitosAcumulados(celulaNumerica(celula));
+						linhaGenerica.getDados().setObitosAcumulados(celulaNumerica(celula));
 						break;
 					}
 					}
 				}
-				dadosDasLinhas.add(linhaGenerica);
+				OrganizaDadosDaPlanilha.organizarDados(linhaGenerica, pais, estados, municipios);
 			} catch (Exception e) {
 				System.err.println("Falha ao ler a coluna na linha: " + linhaind);
+				System.out.println(linhaGenerica);
 			}
 			linhaind++;
 		}
@@ -113,14 +107,13 @@ public class LeituraPlanilha {
 			return Integer.valueOf(Double.valueOf(celula.getNumericCellValue()).intValue());
 		}
 	}
-	
+
 	private String celulaString(Cell celula) {
 		try {
 			return celula.getStringCellValue();
-		}catch (IllegalStateException e) {
+		} catch (IllegalStateException e) {
 			return Double.valueOf(celula.getNumericCellValue()).toString();
 		}
 	}
-	
 
 }

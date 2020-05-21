@@ -1,6 +1,7 @@
 package projeto.covid.controler;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -11,7 +12,9 @@ import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Pais;
+import projeto.covid.modelo.database.planilha.DadosDaLinha;
 import projeto.covid.modelo.database.planilha.LeituraPlanilha;
+import projeto.covid.modelo.database.planilha.OrganizaDadosDaPlanilha;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class FXMLLoadingController implements TelaMudanca {
@@ -66,6 +69,7 @@ public class FXMLLoadingController implements TelaMudanca {
 				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20mai2020.xlsx");
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
+					Runtime.getRuntime().gc();
 					consoleLoading.appendText("Dados lidos com sucesso\n");
 					grupoEstados.getGrupo().sort(null);
 					grupoMunicipios.getGrupo().sort(null);
@@ -77,7 +81,7 @@ public class FXMLLoadingController implements TelaMudanca {
 				}
 				
 				Thread.sleep(1500);
-
+				Runtime.getRuntime().gc();
 				return null;
 			}
 

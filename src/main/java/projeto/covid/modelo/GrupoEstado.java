@@ -6,12 +6,13 @@ import projeto.covid.modelo.auxilio.Nacao;
 public class GrupoEstado extends Grupo {
 
 	public Estado buscarEstado(String nomeEstado) {
-		for (Nacao estado : super.getGrupo()) {
-			if (super.containsIgnoreAccents(estado.getNome(), nomeEstado.trim())) {
+		for (int i = super.getGrupo().size()-1; i >= 0; i--) {
+			Nacao estado = super.getGrupo(i);
+			if (estado.getNome().equals(nomeEstado.trim().toUpperCase())) {
 				return (Estado) estado;
 			}
 		}
-		return null;
+		return null;	
 	}
 
 	@Override

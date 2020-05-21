@@ -14,7 +14,9 @@ public abstract class Grupo {
 	public List<Nacao> getGrupo() {
 		return this.grupo;
 	}
-
+	public Nacao getGrupo(int index) {
+		return this.grupo.get(index);
+	}
 	public void setGrupo(Nacao e) {
 		this.grupo.add(e);
 	}
