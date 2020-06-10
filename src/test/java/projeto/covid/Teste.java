@@ -36,5 +36,7 @@ public class Teste {
 //		System.out.println(brasil);
 //		System.out.println(m);
 //		System.out.println(e);
+		String a = "1235.1..51,584^55(5)(6)";
+		System.out.println(a.replaceAll("[(][0-9][)]|[.]", ""));
 	}
 }

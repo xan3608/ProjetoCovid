@@ -5,6 +5,7 @@ import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Municipio;
 import projeto.covid.modelo.Pais;
+import projeto.covid.modelo.auxilio.Nacao;
 
 public class OrganizaDadosDaPlanilha {
 
@@ -18,7 +19,7 @@ public class OrganizaDadosDaPlanilha {
 		if ((linha.getMunicipio() == null || linha.getMunicipio().trim().isEmpty()) && 
 				linha.getCodMunicipio() == null || linha.getCodMunicipio() <= 0) {
 			
-			Estado estado = grupoEstados.buscarEstado(linha.getEstado());
+			Nacao estado = grupoEstados.buscarEstado(linha.getEstado());
 			if (estado != null) {
 				estado.setDados(linha.getDados());
 			} else {
@@ -30,7 +31,7 @@ public class OrganizaDadosDaPlanilha {
 			return;
 		}
 
-		Municipio municipio = grupoMunicipios.buscarMunicipio(linha.getMunicipio());
+		Nacao municipio = grupoMunicipios.buscarMunicipio(linha.getMunicipio());
 		if (municipio != null) {
 			municipio.setDados(linha.getDados());
 		} else {

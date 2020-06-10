@@ -5,13 +5,19 @@ import projeto.covid.modelo.auxilio.Nacao;
 
 public class GrupoEstado extends Grupo {
 
-	public Estado buscarEstado(String nomeEstado) {
-		for (int i = super.getGrupo().size()-1; i >= 0; i--) {
-			Nacao estado = super.getGrupo(i);
-			if (estado.getNome().equals(nomeEstado.trim().toUpperCase())) {
-				return (Estado) estado;
-			}
+	public Nacao buscarEstado(String nomeEstado) {
+		if(super.getGrupo().isEmpty()) {
+			return null;
 		}
+		
+		if(super.getGrupo().get(super.getGrupo().size()-1).getNome().equals(nomeEstado.trim().toUpperCase()))
+			return super.getGrupo().get(super.getGrupo().size()-1);
+//		for (int i = super.getGrupo().size()-1; i >= 0; i--) {
+//			Nacao estado = super.getGrupo(i);
+//			if (estado.getNome()) {
+//				return (Estado) estado;
+//			}
+//		}
 		return null;	
 	}
 

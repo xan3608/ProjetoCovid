@@ -1,7 +1,7 @@
 package projeto.covid.controler;
 
 import java.io.IOException;
-import java.util.List;
+import java.net.URISyntaxException;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -12,9 +12,8 @@ import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.database.planilha.DadosDaLinha;
 import projeto.covid.modelo.database.planilha.LeituraPlanilha;
-import projeto.covid.modelo.database.planilha.OrganizaDadosDaPlanilha;
+import projeto.covid.modelo.database.scraping.Selenium;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class FXMLLoadingController implements TelaMudanca {
@@ -45,29 +44,28 @@ public class FXMLLoadingController implements TelaMudanca {
 
 				DiretorioTemp diretorio = new DiretorioTemp();
 				consoleLoading.appendText("Extraindo arquivos\n");
-//				try {
-//					diretorio.extrairParaTemp();
-//					consoleLoading.appendText("Arquivos extraidos com sucesso\n");
-//				} catch (IOException | URISyntaxException e) {
-//					consoleLoading.appendText("Erro ao extrair arquivos\n");
-//					e.printStackTrace();
-//				}
+				try {
+					diretorio.extrairParaTemp();
+					consoleLoading.appendText("Arquivos extraidos com sucesso\n");
+				} catch (IOException | URISyntaxException e) {
+					consoleLoading.appendText("Erro ao extrair arquivos\n");
+					e.printStackTrace();
+				}
 				
 //				consoleLoading.appendText("Iniciando selenium\n");
 //				Selenium selenium = new Selenium(diretorio);
 //				consoleLoading.appendText("Buscando dados do Ministerio da Saude\n");
 //				selenium.downloadDados();
 //				System.out.println(selenium.getDownloadName());
-				consoleLoading.appendText("Dados obtidos com sucesso\n");
+//				consoleLoading.appendText("Dados obtidos com sucesso\n");
 				
 				consoleLoading.appendText("Carregando banco de dados\n");
 				brasil = new Pais("Brasil");
 				grupoEstados = new GrupoEstado();
 				grupoMunicipios = new GrupoMunicipio();
 				consoleLoading.appendText("Lendo dados da planilha...\n");
-				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
-				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_19mai2020.xlsx");
-				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20mai2020.xlsx");
+//				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
+				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_09jun2020.xlsx");
 				try {
 					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
 					Runtime.getRuntime().gc();
@@ -75,7 +73,7 @@ public class FXMLLoadingController implements TelaMudanca {
 					grupoEstados.getGrupo().sort(null);
 					grupoMunicipios.getGrupo().sort(null);
 					consoleLoading.appendText("Banco de dados carregado com sucesso\n");
-				} catch (IOException e) {
+				} catch (Exception e) {
 					consoleLoading.appendText("Erro ao ler dados\n");
 					e.printStackTrace();
 					consoleLoading.appendText("Falha ao carregar banco de dados\n");

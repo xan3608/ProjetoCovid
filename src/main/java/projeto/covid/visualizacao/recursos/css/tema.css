@@ -1,0 +1,5 @@
+.principal {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-pref-height: 600px;
+    -fx-pref-width: 800px;
+}

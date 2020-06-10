@@ -6,8 +6,9 @@ public class DadosDaLinha {
 	private String regiao, estado, municipio, regiaoSaude;
 	private Integer codMunicipio;
 	private Dados dados;
-	private int linha;
-	public DadosDaLinha(int linha) {
+	private Integer linha;
+	
+	public DadosDaLinha(Integer linha) {
 		this.dados = new Dados();
 		this.linha = linha;
 	}
@@ -16,7 +17,7 @@ public class DadosDaLinha {
 	public String toString() {
 		return "Linha: " + this.linha + " Regiao: '" + this.regiao + "' Estado: '" + this.estado +
 				"' Municipio: '" + this.municipio + "' RegiaoSaude: '" + this.regiaoSaude +
-				"' codMunicipio: '" + this.codMunicipio + "' Data:" + this.dados.getData();
+				"' codMunicipio: '" + this.codMunicipio + "' Data:" + this.dados.getDataString();
 	}
 	
 	public String getRegiao() {

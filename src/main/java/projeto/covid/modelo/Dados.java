@@ -1,10 +1,12 @@
 package projeto.covid.modelo;
 
+import java.util.GregorianCalendar;
+
 public class Dados {
-	private String data;
+	private GregorianCalendar data;
 	private Integer populacao, semanaEpidemia, casosAcumulados, obitosAcumulados;
 
-	public Dados(String data, Integer populacao, Integer semanaEpidemia, Integer casosAcumulados,
+	public Dados(GregorianCalendar data, Integer populacao, Integer semanaEpidemia, Integer casosAcumulados,
 			Integer obitosAcumulados) {
 		this.data = data;
 		this.populacao = populacao;
@@ -23,11 +25,14 @@ public class Dados {
 				+ "' ";
 	}
 
-	public String getData() {
+	public GregorianCalendar getData() {
 		return this.data;
 	}
+	public String getDataString(){
+		return this.data.get(GregorianCalendar.DAY_OF_MONTH) + "/" + this.data.get(GregorianCalendar.MONTH) + "/" + this.data.get(GregorianCalendar.YEAR);
+	}
 
-	public void setData(String data) {
+	public void setData(GregorianCalendar data) {
 		this.data = data;
 	}
 

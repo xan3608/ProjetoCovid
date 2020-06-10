@@ -39,7 +39,7 @@ public class Principal extends Application {
 			Parent fxmlEstatisticaMunicipios = FXMLLoader
 					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaMunicipios.fxml"));
 			Parent fxmlGraficos = FXMLLoader
-					.load(getClass().getResource("../../visualizacao/FXMLGraficos.fxml"));
+					.load(getClass().getResource("../../visualizacao/FXMLGraficosPorData.fxml"));
 
 			sceneLoading = new Scene(fxmlLoading);
 			scenePrincipal = new Scene(fxmlPrincipal);
@@ -47,7 +47,7 @@ public class Principal extends Application {
 			sceneEstatisticaEstados = new Scene(fxmlEstatisticaEstados);
 			sceneEstatisticaMunicipios = new Scene(fxmlEstatisticaMunicipios);
 			sceneGraficos = new Scene(fxmlGraficos);
-			
+
 			stage.setScene(sceneLoading);
 			stage.show();
 		} catch (Exception e) {
@@ -61,6 +61,7 @@ public class Principal extends Application {
 
 	public static void trocarTela(Telas tela) {
 		trocarTela(tela, null);
+
 	}
 
 	public static void trocarTela(Telas tela, Object dados) {
@@ -91,6 +92,7 @@ public class Principal extends Application {
 			notificarTodosOuvintes(tela, dados);
 			break;
 		}
+		Runtime.getRuntime().gc();
 	}
 
 	public static void addTelaMudanca(TelaMudanca novaTela) {

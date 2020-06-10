@@ -4,19 +4,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.auxilio.Grupo;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
+import projeto.covid.modelo.Pais;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class LeituraPlanilha {
@@ -27,11 +26,18 @@ public class LeituraPlanilha {
 	}
 
 	public void lerDados(Pais pais, GrupoEstado estados, GrupoMunicipio municipios) throws IOException {
+		long tempini = System.currentTimeMillis();
 		File arquivo = this.arquivoPath.toFile();
+		System.out.println("Abrindo planilha");
 		FileInputStream fis = new FileInputStream(arquivo);
+		System.out.println(arquivo);
 		XSSFWorkbook planilha = new XSSFWorkbook(fis);
+
+		System.out.println("Planilha aberta");
 		XSSFSheet pagina = planilha.getSheetAt(0);
+		System.out.println("Lendo planilha");
 		lerDadosPagina(pagina, pais, estados, municipios);
+		System.out.println("Tempo decorrido : " + (System.currentTimeMillis() - tempini) / 1000 + " segundos");
 		planilha.close();
 		fis.close();
 		planilha = null;
@@ -41,7 +47,7 @@ public class LeituraPlanilha {
 		Iterator<Row> linhasIterator = pagina.iterator();
 		int linhaind = 1;
 
-		linhasIterator.next(); // pula cabeçalho		
+		linhasIterator.next(); // pula cabeçalho
 		while (linhasIterator.hasNext()) {
 			Row linha = linhasIterator.next();
 			Iterator<Cell> celulasIterator = linha.iterator();
@@ -70,7 +76,7 @@ public class LeituraPlanilha {
 						break;
 					}
 					case 7: { // data
-						linhaGenerica.getDados().setData(celulaString(celula));
+						linhaGenerica.getDados().setData(celulaDate(celula));
 						break;
 					}
 					case 8: { // SemanaEpidemia
@@ -87,33 +93,38 @@ public class LeituraPlanilha {
 					}
 					case 11: { // obitosAcumulados
 						linhaGenerica.getDados().setObitosAcumulados(celulaNumerica(celula));
-						break;
 					}
 					}
 				}
+				//System.out.println(linhaGenerica);
+				System.out.println(linhaind);
 				OrganizaDadosDaPlanilha.organizarDados(linhaGenerica, pais, estados, municipios);
-			} catch (Exception e) {
-				System.err.println("Falha ao ler a coluna na linha: " + linhaind);
-				System.out.println(linhaGenerica);
+			} catch (IllegalStateException | NumberFormatException e) {
+				System.err.println(linhaGenerica);
+				System.err.println(linhaGenerica.getDados());
 			}
 			linhaind++;
 		}
 	}
 
+	private GregorianCalendar celulaDate(Cell celula) {
+		GregorianCalendar data = new GregorianCalendar();
+		data.setTime(celula.getDateCellValue());
+		return data;
+	}
+
 	private Integer celulaNumerica(Cell celula) {
-		try {
-			return Integer.valueOf(celula.getStringCellValue());
-		} catch (IllegalStateException | NumberFormatException e) {
-			return Integer.valueOf(Double.valueOf(celula.getNumericCellValue()).intValue());
+		if (celula.getCellType() == CellType.STRING) {
+			return Integer.valueOf(celula.getStringCellValue().replaceAll("[(][0-9][)]|[.]", ""));
 		}
+		return Integer.valueOf(Double.valueOf(celula.getNumericCellValue()).intValue());
 	}
 
 	private String celulaString(Cell celula) {
-		try {
-			return celula.getStringCellValue();
-		} catch (IllegalStateException e) {
+		if (celula.getCellType() == CellType.NUMERIC) {
 			return Double.valueOf(celula.getNumericCellValue()).toString();
 		}
+		return celula.getStringCellValue();
 	}
 
 }
