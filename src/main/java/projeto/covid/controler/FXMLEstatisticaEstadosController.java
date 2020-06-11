@@ -14,21 +14,23 @@ import projeto.covid.controler.auxilio.Filtro;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.GrupoEstado;
-import projeto.covid.modelo.auxilio.Nacao;
+import projeto.covid.modelo.Estado;
+import projeto.covid.modelo.Nacao;
 
 public class FXMLEstatisticaEstadosController implements TelaMudanca {
 
 	@FXML
-	private ListView<Nacao> lvEstados;
+	private ListView<Estado> lvEstados;
 	@FXML
 	private TextField txFiltroEstado;
-
-	private GrupoEstado grupoEstados;
-
+	
+	private Nacao nacao;
+	private Filtro<Estado> filtro;
+	
 	@FXML
 	private void botaoVoltar(ActionEvent event) {
 		Principal.trocarTela(Telas.PRINCIPAL);
+		this.filtro = null;
 	}
 
 	@FXML
@@ -49,26 +51,28 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 
 	@FXML
 	private void filtroEstado(KeyEvent event) {
-		carregarEstados(Filtro.filtrarGrupo(this.grupoEstados, event, this.txFiltroEstado));
+		carregarEstados(filtro.filtrarGrupo(nacao.getEstados(), event, this.txFiltroEstado));
 	}
 
 	@FXML
 	public void initialize() {
 		Principal.addTelaMudanca(this);
+		this.filtro = new Filtro<Estado>();
+
 	}
 
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_ESTADO)) {
-			this.grupoEstados = (GrupoEstado) dados;
-			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.grupoEstados);
-			carregarEstados(this.grupoEstados.getGrupo());
+			this.nacao = ((Nacao) dados);
+			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.nacao.getEstados().size());
+			carregarEstados(this.nacao.getEstados());
 		}
 	}
 
-	public void carregarEstados(List<Nacao> listaEstados) {
+	public void carregarEstados(List<Estado> estados) {
 		this.lvEstados.getItems().clear();
-		this.lvEstados.setItems(FXCollections.observableArrayList(listaEstados));
+		this.lvEstados.setItems(FXCollections.observableArrayList(estados));
 	}
 
 }

@@ -14,17 +14,18 @@ import projeto.covid.controler.auxilio.Filtro;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.GrupoMunicipio;
-import projeto.covid.modelo.auxilio.Nacao;
+import projeto.covid.modelo.Municipio;
+import projeto.covid.modelo.Nacao;
 
 public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 
 	@FXML
-	private ListView<Nacao> lvMunicipios;
+	private ListView<Municipio> lvMunicipios;
 	@FXML
 	private TextField txFiltroMunicipio;
 
-	private GrupoMunicipio grupoMunicipios;
+	private Nacao nacao;
+	private Filtro<Municipio> filtro;
 
 	@FXML
 	private void botaoVoltar(ActionEvent event) {
@@ -49,25 +50,26 @@ public class FXMLEstatisticaMunicipiosController implements TelaMudanca {
 
 	@FXML
 	private void filtroMunicipios(KeyEvent event) {
-		carregarMunicipios(Filtro.filtrarGrupo(this.grupoMunicipios, event, this.txFiltroMunicipio));
+		carregarMunicipios(filtro.filtrarGrupo(this.nacao.getMunicipios(), event, this.txFiltroMunicipio));
 	}
 
 	@FXML
 	public void initialize() {
 		Principal.addTelaMudanca(this);
+		this.filtro = new Filtro<Municipio>();
 	}
 
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_MUNICIPIOS)) {
-			this.grupoMunicipios = (GrupoMunicipio) dados;
-			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.grupoMunicipios);
-			carregarMunicipios(this.grupoMunicipios.getGrupo());
+			this.nacao = (Nacao) dados;
+			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.nacao.getMunicipios().size());
+			carregarMunicipios(this.nacao.getMunicipios());
 		}
 
 	}
 
-	private void carregarMunicipios(List<Nacao> listaMunicipios) {
+	private void carregarMunicipios(List<Municipio> listaMunicipios) {
 		this.lvMunicipios.getItems().clear();
 		this.lvMunicipios.setItems(FXCollections.observableArrayList(listaMunicipios));
 	}

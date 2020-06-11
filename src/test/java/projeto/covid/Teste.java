@@ -2,6 +2,8 @@ package projeto.covid;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
@@ -36,5 +38,11 @@ public class Teste {
 //		System.out.println(brasil);
 //		System.out.println(m);
 //		System.out.println(e);
+		ArrayList<Integer> a =new ArrayList<Integer>(1);
+		a.add(55);
+		a.add(55);
+
+		System.out.println(a.size());
+		System.out.println(a);
 	}
 }

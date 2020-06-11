@@ -5,29 +5,25 @@ import javafx.fxml.FXML;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.GrupoEstado;
-import projeto.covid.modelo.GrupoMunicipio;
+import projeto.covid.modelo.Nacao;
 
 public class FXMLPrincipalController implements TelaMudanca {
 
-	private Pais brasil;
-	private GrupoEstado grupoEstados;
-	private GrupoMunicipio grupoMunicipios;
+	private Nacao nacao;
 
 	@FXML
 	protected void botaoPais(ActionEvent event) {
-		Principal.trocarTela(Telas.ESTATISTICA_PAIS, this.brasil);
+		Principal.trocarTela(Telas.ESTATISTICA_PAIS, this.nacao);
 	}
 
 	@FXML
 	protected void botaoEstado(ActionEvent event) {
-		Principal.trocarTela(Telas.ESTATISTICA_ESTADO, this.grupoEstados);
+		Principal.trocarTela(Telas.ESTATISTICA_ESTADO, this.nacao);
 	}
 
 	@FXML
 	protected void botaoMunicipio(ActionEvent event) {
-		Principal.trocarTela(Telas.ESTATISTICA_MUNICIPIOS, this.grupoMunicipios);
+		Principal.trocarTela(Telas.ESTATISTICA_MUNICIPIOS, this.nacao);
 	}
 
 	@FXML
@@ -44,9 +40,7 @@ public class FXMLPrincipalController implements TelaMudanca {
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.PRINCIPAL)) {
 			if (dados != null && dados.toString().contains("LOAD")) {
-				this.brasil = FXMLLoadingController.getBrasil();
-				this.grupoEstados = FXMLLoadingController.getGrupoEstados();
-				this.grupoMunicipios = FXMLLoadingController.getGrupoMunicipios();
+				this.nacao = FXMLLoadingController.getNacao();
 			}
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + dados);
 		}

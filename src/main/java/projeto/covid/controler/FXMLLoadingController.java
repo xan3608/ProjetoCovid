@@ -1,7 +1,6 @@
 package projeto.covid.controler;
 
 import java.io.IOException;
-import java.util.List;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -9,20 +8,14 @@ import javafx.scene.control.TextArea;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.GrupoEstado;
-import projeto.covid.modelo.GrupoMunicipio;
-import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.database.planilha.DadosDaLinha;
+import projeto.covid.modelo.Nacao;
 import projeto.covid.modelo.database.planilha.LeituraPlanilha;
-import projeto.covid.modelo.database.planilha.OrganizaDadosDaPlanilha;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class FXMLLoadingController implements TelaMudanca {
 
 	private Task<Void> tarefa;
-	private static Pais brasil;
-	private static GrupoEstado grupoEstados;
-	private static GrupoMunicipio grupoMunicipios;
+	private static Nacao nacao;
 
 	@FXML
 	private TextArea consoleLoading;
@@ -61,18 +54,14 @@ public class FXMLLoadingController implements TelaMudanca {
 				consoleLoading.appendText("Dados obtidos com sucesso\n");
 				
 				consoleLoading.appendText("Carregando banco de dados\n");
-				brasil = new Pais("Brasil");
-				grupoEstados = new GrupoEstado();
-				grupoMunicipios = new GrupoMunicipio();
+				nacao = new Nacao("Brasil");
 				consoleLoading.appendText("Lendo dados da planilha...\n");
 				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
-				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20mai2020.xlsx");
+				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20200516.xlsx");
 				try {
-					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
+					dadoPlanilha.lerDados(nacao);
 					Runtime.getRuntime().gc();
 					consoleLoading.appendText("Dados lidos com sucesso\n");
-					grupoEstados.getGrupo().sort(null);
-					grupoMunicipios.getGrupo().sort(null);
 					consoleLoading.appendText("Banco de dados carregado com sucesso\n");
 				} catch (IOException e) {
 					consoleLoading.appendText("Erro ao ler dados\n");
@@ -80,7 +69,6 @@ public class FXMLLoadingController implements TelaMudanca {
 					consoleLoading.appendText("Falha ao carregar banco de dados\n");
 				}
 				
-				Thread.sleep(1500);
 				Runtime.getRuntime().gc();
 				return null;
 			}
@@ -98,15 +86,7 @@ public class FXMLLoadingController implements TelaMudanca {
 		return this.tarefa;
 	}
 
-	public static Pais getBrasil() {
-		return FXMLLoadingController.brasil;
-	}
-
-	public static GrupoEstado getGrupoEstados() {
-		return FXMLLoadingController.grupoEstados;
-	}
-
-	public static GrupoMunicipio getGrupoMunicipios() {
-		return FXMLLoadingController.grupoMunicipios;
+	public static Nacao getNacao() {
+		return FXMLLoadingController.nacao;
 	}
 }

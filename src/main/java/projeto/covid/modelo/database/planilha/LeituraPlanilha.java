@@ -4,19 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.auxilio.Grupo;
-import projeto.covid.modelo.GrupoEstado;
-import projeto.covid.modelo.GrupoMunicipio;
+import projeto.covid.modelo.Nacao;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class LeituraPlanilha {
@@ -26,18 +21,18 @@ public class LeituraPlanilha {
 		this.arquivoPath = diretorio.getBrowserDownload().resolve(arquivoNome).toAbsolutePath();
 	}
 
-	public void lerDados(Pais pais, GrupoEstado estados, GrupoMunicipio municipios) throws IOException {
+	public void lerDados(Nacao nacao) throws IOException {
 		File arquivo = this.arquivoPath.toFile();
 		FileInputStream fis = new FileInputStream(arquivo);
 		XSSFWorkbook planilha = new XSSFWorkbook(fis);
 		XSSFSheet pagina = planilha.getSheetAt(0);
-		lerDadosPagina(pagina, pais, estados, municipios);
+		lerDadosPagina(pagina, nacao);
 		planilha.close();
 		fis.close();
 		planilha = null;
 	}
 
-	private void lerDadosPagina(XSSFSheet pagina, Pais pais, GrupoEstado estados, GrupoMunicipio municipios) {
+	private void lerDadosPagina(XSSFSheet pagina, Nacao nacao) {
 		Iterator<Row> linhasIterator = pagina.iterator();
 		int linhaind = 1;
 
@@ -91,7 +86,7 @@ public class LeituraPlanilha {
 					}
 					}
 				}
-				OrganizaDadosDaPlanilha.organizarDados(linhaGenerica, pais, estados, municipios);
+				OrganizaDadosDaPlanilha.organizarDados(linhaGenerica, nacao);
 			} catch (Exception e) {
 				System.err.println("Falha ao ler a coluna na linha: " + linhaind);
 				System.out.println(linhaGenerica);

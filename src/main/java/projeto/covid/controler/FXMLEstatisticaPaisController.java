@@ -1,7 +1,6 @@
 package projeto.covid.controler;
 
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -11,7 +10,7 @@ import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Dados;
-import projeto.covid.modelo.Pais;
+import projeto.covid.modelo.Nacao;
 
 public class FXMLEstatisticaPaisController implements TelaMudanca {
 
@@ -28,7 +27,7 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
     @FXML
     private TableColumn<Dados, Integer> colObito;
 	
-	private Pais brasil;
+	private Nacao nacao;
 
 	@FXML
 	protected void botaoVoltar(ActionEvent event) {
@@ -37,7 +36,7 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
 
 	@FXML
 	protected void botaoGrafico(ActionEvent event) {
-		Principal.trocarTela(Telas.GRAFICOS, brasil);
+		Principal.trocarTela(Telas.GRAFICOS, nacao);
 	}
 
 	@FXML
@@ -54,14 +53,14 @@ public class FXMLEstatisticaPaisController implements TelaMudanca {
 	@Override
 	public void mudouTela(Telas novaTela, Object dados) {
 		if (novaTela.equals(Telas.ESTATISTICA_PAIS)) {
-			this.brasil = (Pais) dados;
-			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.brasil);
+			this.nacao = (Nacao) dados;
+			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.nacao);
 			povoarTabela();
 		}
 	}
 	
 	private void povoarTabela() {
-		this.tvBrasil.setItems(FXCollections.observableArrayList(this.brasil.getDados()));
+		//Othis.tvBrasil.setItems(FXCollections.observableArrayList(this.nacao.getDados()));
 	}
 
 }

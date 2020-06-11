@@ -39,7 +39,7 @@ public class Principal extends Application {
 			Parent fxmlEstatisticaMunicipios = FXMLLoader
 					.load(getClass().getResource("../../visualizacao/FXMLEstatisticaMunicipios.fxml"));
 			Parent fxmlGraficos = FXMLLoader
-					.load(getClass().getResource("../../visualizacao/FXMLGraficos.fxml"));
+					.load(getClass().getResource("../../visualizacao/FXMLGraficosPorData.fxml"));
 
 			sceneLoading = new Scene(fxmlLoading);
 			scenePrincipal = new Scene(fxmlPrincipal);
@@ -89,7 +89,6 @@ public class Principal extends Application {
 			stage.setTitle("Projeto Covid - 19 - Graficos");
 			stage.setScene(sceneGraficos);
 			notificarTodosOuvintes(tela, dados);
-			break;
 		}
 	}
 

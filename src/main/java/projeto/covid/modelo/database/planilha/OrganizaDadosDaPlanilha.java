@@ -1,28 +1,21 @@
 package projeto.covid.modelo.database.planilha;
 
 import projeto.covid.modelo.Estado;
-import projeto.covid.modelo.GrupoEstado;
-import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Municipio;
-import projeto.covid.modelo.Pais;
+import projeto.covid.modelo.Nacao;
 
 public class OrganizaDadosDaPlanilha {
 
-	public static void organizarDados(DadosDaLinha linha, Pais brasil, GrupoEstado grupoEstados,
-			GrupoMunicipio grupoMunicipios) {
-		
-		if (linha.getRegiao().equalsIgnoreCase("Brasil")) {
-			brasil.setDados(linha.getDados());
-			return;
-		}
+	public static void organizarDados(DadosDaLinha linha, Nacao nacao) {
+
 		if ((linha.getMunicipio() == null || linha.getMunicipio().trim().isEmpty()) && 
 				linha.getCodMunicipio() == null || linha.getCodMunicipio() <= 0) {
 			
-			Estado estado = grupoEstados.buscarEstado(linha.getEstado());
+			Estado estado = nacao.buscarEstadoPorNome(linha.getEstado());
 			if (estado != null) {
 				estado.setDados(linha.getDados());
 			} else {
-				grupoEstados.setGrupo(popularEstado(linha));
+				nacao.setEstados(popularEstado(linha));
 			}
 			return;
 		}
@@ -30,24 +23,19 @@ public class OrganizaDadosDaPlanilha {
 			return;
 		}
 
-		Municipio municipio = grupoMunicipios.buscarMunicipio(linha.getMunicipio());
+		Municipio municipio = nacao.buscarMunicipioPorNome(linha.getMunicipio());
 		if (municipio != null) {
 			municipio.setDados(linha.getDados());
 		} else {
-			grupoMunicipios.setGrupo(popularMunicipio(linha));
+			nacao.setMunicipios(popularMunicipio(linha));
 		}
 	}
 
 	private static Municipio popularMunicipio(DadosDaLinha linha) {
-		Municipio municipio = new Municipio(linha.getMunicipio(), linha.getRegiaoSaude(), linha.getEstado(),
-				linha.getRegiao());
-		municipio.setDados(linha.getDados());
-		return municipio;
+		return new Municipio(linha.getMunicipio(), linha.getEstado(), linha.getDados());
 	}
 
 	private static Estado popularEstado(DadosDaLinha linha) {
-		Estado estado = new Estado(linha.getEstado(), linha.getRegiao());
-		estado.setDados(linha.getDados());
-		return estado;
+		return new Estado(linha.getEstado(), linha.getDados());
 	}
 }

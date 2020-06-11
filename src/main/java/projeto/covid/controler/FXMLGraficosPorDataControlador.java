@@ -11,98 +11,157 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
+import javafx.scene.control.SplitMenuButton;
+import javafx.scene.input.MouseEvent;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
+import projeto.covid.modelo.Dados;
+import projeto.covid.modelo.Estado;
 import projeto.covid.modelo.auxilio.DadosGraficos;
-import projeto.covid.modelo.auxilio.Nacao;
 
-public class FXMLGraficosControlador implements TelaMudanca {
+public class FXMLGraficosPorDataControlador implements TelaMudanca {
 
-	private Nacao entidade;
-
-	@FXML
-	private CategoryAxis xAxis = new CategoryAxis();
+	private Estado entidade;
 
 	@FXML
-	private NumberAxis yAxis = new NumberAxis();
+	private CategoryAxis xAxis;
 
 	@FXML
-	private LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+	private NumberAxis yAxis;
+
+	@FXML
+	private LineChart<String, Number> lineChart;
+
+	@FXML
+	private Label dataAtual;
+
+	@FXML
+	private Slider sliderData;
+
+	@FXML
+	private Label dataMax;
+
+	private List<String> datas;
+	private String graficoEscolhido;
 
 	@FXML
 	private void initialize() {
 		Principal.addTelaMudanca(this);
 	}
-
+	@Override
+	public void mudouTela(Telas novaTela, Object dados) {
+		if (novaTela.equals(Telas.GRAFICOS)) {
+			this.entidade = (Estado) dados;
+			this.graficoEscolhido = "Casos";
+			System.out.println("Nova Tela: " + novaTela + ", Dados: " + this.entidade);
+			carregarDatas();
+			atualizarGrafico();
+		}
+	}
 	@FXML
 	private void botaoVoltar(ActionEvent event) {
+		this.lineChart.getData().clear();
+		this.datas = null;
 		Principal.trocarTela(Telas.PRINCIPAL);
 	}
 
 	@FXML
-	private void botaoCasos(ActionEvent event) {
-		List<Series<String, Number>> series = new ArrayList<XYChart.Series<String, Number>>();
-		series.add(DadosGraficos.seriesCasosNovos(entidade.getDados()));
-		series.add(DadosGraficos.seriesCasosAcumulados(entidade.getDados()));
-		setInformacoesGraficos("Casos novos e acumulados de COVID-19 por data de notificação",
-								"Data da Notificacao", "Casos");
-		gerarGraficos(series);
+	void mudarDataMin(MouseEvent event) {
+		dataAtual.setText(this.datas.get(Double.valueOf(sliderData.getValue()).intValue()));
 	}
 
 	@FXML
-	void botaoCasosAcumulados(ActionEvent event) {
-		setInformacoesGraficos("Casos acumulados de COVID-19 por data de notificação",
-				"Data da Notificacao", "Casos");
-		gerarGraficos(DadosGraficos.seriesCasosAcumulados(entidade.getDados()));
+	void limitesGraficos(MouseEvent event) {
+		mudarDataMin(null);
+		atualizarGrafico();
 	}
-
 	@FXML
-	void botaoCasosNovos(ActionEvent event) {
-		setInformacoesGraficos("Casos novos de COVID-19 por data de notificação",
-				"Data da Notificacao", "Casos");
-		gerarGraficos(DadosGraficos.seriesCasosNovos(entidade.getDados()));
+	private void menuItemGrafico(ActionEvent event) {
+		MenuItem button = (MenuItem) event.getSource();
+		this.sliderData.setValue(0);
+		this.setGraficoEscolhido(button.getText());
 	}
-	
-    @FXML
-    void botaoObitos(ActionEvent event) {
+	@FXML
+	private void botaoSplitGrafico(ActionEvent event) {
+		SplitMenuButton button = (SplitMenuButton) event.getSource();
+		this.sliderData.setValue(0);
+		this.setGraficoEscolhido(button.getText());
+	}
 
-    }
-
-    @FXML
-    void botaoObitosAcumulados(ActionEvent event) {
-
-    }
-
-    @FXML
-    void botaoObitosNovos(ActionEvent event) {
-
-    }
-
-	@Override
-	public void mudouTela(Telas novaTela, Object dados) {
-		if (novaTela.equals(Telas.GRAFICOS)) {
-			this.entidade = (Nacao) dados;
-			System.out.println("Nova Tela: " + novaTela + ", Dados: " + entidade);
-			botaoCasos(null);
+	private void carregarDatas() {
+		this.datas = new ArrayList<String>();
+		for (Dados dado : this.entidade.getDados()) {
+			this.datas.add(dado.getData());
 		}
+		this.dataAtual.setText(this.datas.get(0));
+		this.dataMax.setText(this.datas.get(this.datas.size() - 1));
+		this.sliderData.setMin(0);
+		this.sliderData.setMax(this.datas.size() - 1);
 	}
 
-	private void setInformacoesGraficos(String titulo, String eixoX, String eixoY) {
-		this.lineChart.setTitle(titulo + " - " + entidade.getNome());
+	private void configuracoesGraficos(String titulo, String eixoX, String eixoY) {
+		this.lineChart.setTitle(titulo + " - " + this.entidade);
+		this.lineChart.setAnimated(true);
 		this.xAxis.setLabel(eixoX);
 		this.yAxis.setLabel(eixoY);
+		this.xAxis.setAnimated(false);
 	}
 
 	private void gerarGraficos(Series<String, Number> series) {
 		this.lineChart.getData().clear();
 		this.lineChart.getData().add(series);
-		System.out.println("graph data: " + lineChart.getData().size());
 	}
 
 	private void gerarGraficos(List<Series<String, Number>> series) {
 		this.lineChart.getData().clear();
 		this.lineChart.setData(FXCollections.observableArrayList(series));
-		System.out.println("graph data: " + lineChart.getData().size());
+	}
+	public void setGraficoEscolhido(String grafico) {
+		this.graficoEscolhido = grafico;
+		this.atualizarGrafico();
+	}
+	private void atualizarGrafico() {
+		int comeco = Double.valueOf(sliderData.getValue()).intValue();
+		System.out.println(graficoEscolhido);
+		switch (graficoEscolhido) {
+		case "Casos":
+			System.out.println("Entrei");
+			List<Series<String, Number>> seriesCasos = new ArrayList<XYChart.Series<String, Number>>();
+			seriesCasos.add(DadosGraficos.seriesCasosAcumulados(entidade.getDados(), comeco));
+			seriesCasos.add(DadosGraficos.seriesCasosNovos(entidade.getDados(), comeco));
+			configuracoesGraficos("Casos novos e acumulados de COVID-19 por data de notificação", "Data da Notificacao",
+					"Casos");
+			gerarGraficos(seriesCasos);
+			break;
+		case "Casos Acumulados":
+			configuracoesGraficos("Casos acumulados de COVID-19 por data de notificação", "Data da Notificacao",
+					"Casos Acumulados");
+			gerarGraficos(DadosGraficos.seriesCasosAcumulados(entidade.getDados(), comeco));
+			break;
+		case "Casos Novos":
+			configuracoesGraficos("Casos novos de COVID-19 por data de notificação", "Data da Notificacao", "Casos");
+			gerarGraficos(DadosGraficos.seriesCasosNovos(entidade.getDados(), comeco));
+			break;
+		case "Obitos":
+			List<Series<String, Number>> seriesObitos = new ArrayList<XYChart.Series<String, Number>>();
+			seriesObitos.add(DadosGraficos.seriesObitosAcumulados(entidade.getDados(), comeco));
+			seriesObitos.add(DadosGraficos.seriesObitosNovos(entidade.getDados(), comeco));
+			configuracoesGraficos("Obitos novos e acumulados de COVID-19 por data de notificação",
+					"Data da Notificacao", "Obitos");
+			gerarGraficos(seriesObitos);
+			break;
+		case "Obitos Acumulados":
+			configuracoesGraficos("Obitos acumulados de COVID-19 por data de notificação", "Data da Notificacao",
+					"Obitos Acumulados");
+			gerarGraficos(DadosGraficos.seriesObitosAcumulados(entidade.getDados(), comeco));
+			break;
+		case "Obitos Novos":
+			configuracoesGraficos("Obitos novos de COVID-19 por data de notificação", "Data da Notificacao", "Casos");
+			gerarGraficos(DadosGraficos.seriesObitosNovos(entidade.getDados(), comeco));
+		}
 	}
 }

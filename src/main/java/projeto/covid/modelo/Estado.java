@@ -1,53 +1,47 @@
 package projeto.covid.modelo;
 
-public class Estado extends Pais implements Comparable<Estado> {
-	private String nomeEstado, nomeRegiao;
+import java.util.ArrayList;
+import java.util.List;
 
-	public Estado(String estado, String regiao) {
-		super();
+public class Estado implements Comparable<Estado> {
+	private String nomeEstado;
+	private List<Dados> dados;
+
+	public Estado(String estado, Dados dados) {
+		this.dados = new ArrayList<Dados>();
 		this.setNomeEstado(estado);
-		this.setNomeRegiao(regiao);
-		
-		
+		this.setDados(dados);
 	}
 
-	public Estado() {
-		super();
+	@Override
+	public int compareTo(Estado outro) {
+		return this.getNome().compareTo(outro.getNome());
 	}
-
 	@Override
 	public String toString() {
-		return String.format("%-10s%-20s", this.nomeEstado, this.nomeRegiao);
+		return this.getNome();
 	}
-
-	@Override
-	public int compareTo(Estado e) {
-		if (this.nomeRegiao.compareToIgnoreCase(e.getNomeRegiao()) != 0) {
-			return 0;
-		} else {
-			return this.nomeEstado.compareToIgnoreCase(e.getNomeEstado());
-		}
-	}
-
-	@Override
 	public String getNome() {
-		return getNomeEstado();
-	}
-
-	public String getNomeRegiao() {
-		return this.nomeRegiao;
-	}
-
-	public void setNomeRegiao(String regiao) {
-		this.nomeRegiao = regiao.toUpperCase().trim();
+		return this.getNomeEstado();
 	}
 
 	public String getNomeEstado() {
-		return this.nomeEstado;
+		return nomeEstado;
 	}
 
-	public void setNomeEstado(String estado) {
-		this.nomeEstado = estado.toUpperCase().trim();
+	public void setNomeEstado(String nomeEstado) {
+		this.nomeEstado = nomeEstado.trim().toUpperCase();
 	}
 
+	public List<Dados> getDados() {
+		return dados;
+	}
+
+	public void setDados(List<Dados> dados) {
+		this.dados = dados;
+	}
+	
+	public void setDados(Dados dados) {
+		this.dados.add(dados);
+	}
 }
