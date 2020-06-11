@@ -15,7 +15,7 @@ public class ApiCsv {
 	private Scanner ler;
 
 	public void resquestDados(TextArea console, Nacao nacao) {
-		console.appendText("Buscando dados do Brasio.IO\n");
+		console.appendText("Buscando dados do Brasil.IO\n");
 		long inicio = System.currentTimeMillis();
 		try {
 			URLConnection conexao = new URL(URL).openConnection();
@@ -25,7 +25,7 @@ public class ApiCsv {
 			ler = new Scanner(conexao.getInputStream());
 
 			ler.nextLine();
-			console.appendText("Carregando dados do Brasio.IO\n");
+			console.appendText("Carregando dados do Brasil.IO\n");
 			while (ler.hasNext()) {
 				String[] dados = ler.nextLine().split(",");
 				OrganizaDadosCsv.organizaDados(dados, nacao);

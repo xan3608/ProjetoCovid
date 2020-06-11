@@ -3,6 +3,9 @@ package projeto.covid.modelo;
 import java.io.Serializable;
 
 public class Dados implements Serializable, Comparable<Dados> {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String data;
 	private Integer populacao, semanaEpidemia, casosAcumulados, obitosAcumulados, casosNovos, obitosNovos;
 

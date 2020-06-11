@@ -1,5 +1,7 @@
 package projeto.covid.controler;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import projeto.covid.controler.auxilio.TelaMudanca;
@@ -7,6 +9,7 @@ import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.Nacao;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
+import projeto.covid.modelo.database.temporario.ObjetosTemp;
 
 public class FXMLPrincipalController implements TelaMudanca {
 
@@ -30,6 +33,12 @@ public class FXMLPrincipalController implements TelaMudanca {
 
 	@FXML
 	protected void botaoSair(ActionEvent event) {
+		try {
+			ObjetosTemp.gravarDados(diretorio.getDiretorioFiles(), nacao);
+		} catch (IOException e) {
+			System.out.println("Erro ao gravar dados");
+		}
+		
 		System.exit(0);
 	}
 
