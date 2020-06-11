@@ -24,7 +24,6 @@ public class OrganizaDadosCsv {
 //			System.err.format("%-5s%-15s%-5s%-5s%-40s%-10s%-8s%-8s%-15s%-10s%-10s%-10s%-10s%-15s%-8s%-8s\n", dados[0],
 //					dados[1], dados[2], dados[3], dados[4], dados[5], dados[6], dados[7], dados[8], dados[9], dados[10],
 //					dados[11], dados[12], dados[13], dados[14], dados[15]);
-			System.out.println(dados[0]);
 			Estado estado = nacao.buscarEstadoPorNome(dados[3]);
 			if (estado == null) {
 				nacao.setEstados(popularEstado(dados));
