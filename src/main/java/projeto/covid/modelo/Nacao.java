@@ -1,9 +1,15 @@
 package projeto.covid.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nacao {
+public class Nacao implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8071818120386258140L;
+	
 	private String nomePais;
 	private List<Dados> dados;
 	private List<Estado> estados;

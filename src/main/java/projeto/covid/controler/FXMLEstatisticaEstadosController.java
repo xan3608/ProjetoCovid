@@ -30,7 +30,6 @@ public class FXMLEstatisticaEstadosController implements TelaMudanca {
 	@FXML
 	private void botaoVoltar(ActionEvent event) {
 		Principal.trocarTela(Telas.PRINCIPAL);
-		this.filtro = null;
 	}
 
 	@FXML

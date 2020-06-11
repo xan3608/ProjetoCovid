@@ -21,6 +21,7 @@ public class Estado implements Comparable<Estado> {
 	public String toString() {
 		return this.getNome();
 	}
+
 	public String getNome() {
 		return this.getNomeEstado();
 	}
@@ -36,7 +37,7 @@ public class Estado implements Comparable<Estado> {
 	public List<Dados> getDados() {
 		return dados;
 	}
-
+	
 	public void setDados(List<Dados> dados) {
 		this.dados = dados;
 	}

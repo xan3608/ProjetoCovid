@@ -7,7 +7,7 @@ public class Municipio extends Estado {
 		super(estado, dados);
 		this.setNomeMunicipio(municipio);
 	}
-	
+
 	@Override
 	public String getNome() {
 		return this.getNomeMunicipio();

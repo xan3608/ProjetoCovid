@@ -31,6 +31,7 @@ public class Filtro <A>{
 		}
 		return elementosEncontrados;
 	}
+	
 	public static boolean containsIgnoreAccents(String a, String b) {
 		String input1 = Normalizer.normalize(a, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
 				.toLowerCase();
