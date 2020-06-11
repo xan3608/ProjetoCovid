@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Nacao implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8071818120386258140L;
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String nomePais;
 	private List<Dados> dados;
@@ -84,5 +82,11 @@ public class Nacao implements Serializable{
 		}
 		return null;
 	}
-
+	public Dados buscarDadosPorData(String data) {
+		for(Dados dado: this.dados) {
+			if(dado.getData().equals(data))
+				return dado;
+		}
+		return null;
+	}
 }

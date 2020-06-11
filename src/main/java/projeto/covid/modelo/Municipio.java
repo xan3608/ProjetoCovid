@@ -1,6 +1,9 @@
 package projeto.covid.modelo;
 
 public class Municipio extends Estado {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String nomeMunicipio;
 
 	public Municipio(String municipio, String estado, Dados dados) {

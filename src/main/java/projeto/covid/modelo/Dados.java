@@ -3,18 +3,21 @@ package projeto.covid.modelo;
 import java.io.Serializable;
 
 public class Dados implements Serializable, Comparable<Dados> {
+
+	private static final long serialVersionUID = 1L;
+
 	private String data;
 	private Integer populacao, semanaEpidemia, casosAcumulados, obitosAcumulados, casosNovos, obitosNovos;
 
 	public Dados(String data, Integer populacao, Integer semanaEpidemia, Integer casosAcumulados,
 			Integer obitosAcumulados, Integer casosNovos, Integer obitosNovos) {
-		this.data = data;
-		this.populacao = populacao;
-		this.semanaEpidemia = semanaEpidemia;
-		this.casosAcumulados = casosAcumulados;
-		this.obitosAcumulados = obitosAcumulados;
-		this.casosNovos = casosNovos;
-		this.obitosNovos = obitosNovos;
+		this.setData(data);
+		this.setPopulacao(populacao);
+		this.setSemanaEpidemia(semanaEpidemia);
+		this.setCasosAcumulados(casosAcumulados);
+		this.setObitosAcumulados(obitosAcumulados);
+		this.setCasosNovos(casosNovos);
+		this.setObitosNovos(obitosNovos);
 	}
 
 	public Dados() {
@@ -82,6 +85,26 @@ public class Dados implements Serializable, Comparable<Dados> {
 
 	public void setObitosNovos(Integer obitosNovos) {
 		this.obitosNovos = obitosNovos;
+	}
+
+	public void adcionaPopulacao(Integer pop) {
+		this.populacao += pop;
+	}
+
+	public void adcionaCasosAcumulados(Integer casosAcumulados) {
+		this.casosAcumulados += casosAcumulados;
+	}
+
+	public void adcionaCasosNovos(Integer casosNovos) {
+		this.casosNovos += casosNovos;
+	}
+
+	public void adcionaObitosAcumulados(Integer obitosAcumulados) {
+		this.obitosAcumulados += obitosAcumulados;
+	}
+
+	public void adcionaObitosNovos(Integer obitosNovos) {
+		this.obitosNovos += obitosNovos;
 	}
 
 	@Override
