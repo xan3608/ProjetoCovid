@@ -1,16 +1,15 @@
 package projeto.covid.modelo;
 
 public class Municipio extends Estado {
-	private String nomeMunicipio, nomeRegiaoSaude;
+	private String nomeMunicipio;
 
 	public Municipio() {
 		super();
 	}
 
-	public Municipio(String municipio, String regiaoSaude, String estado, String regiao) {
-		super(estado, regiao);
+	public Municipio(String municipio, String estado, Dados dados) {
+		super(estado, dados);
 		this.setMunicipio(municipio);
-		this.setRegiaoSaude(regiaoSaude);
 	}
 
 	@Override
@@ -36,11 +35,4 @@ public class Municipio extends Estado {
 		this.nomeMunicipio = municipio.toUpperCase().trim();
 	}
 
-	public String getRegiaoSaude() {
-		return this.nomeRegiaoSaude;
-	}
-
-	public void setRegiaoSaude(String regiaoSaude) {
-		this.nomeRegiaoSaude = regiaoSaude.toUpperCase().trim();
-	}
 }

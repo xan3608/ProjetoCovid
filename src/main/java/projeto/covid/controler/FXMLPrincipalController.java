@@ -5,15 +5,17 @@ import javafx.fxml.FXML;
 import projeto.covid.controler.auxilio.TelaMudanca;
 import projeto.covid.controler.auxilio.Telas;
 import projeto.covid.controler.principal.Principal;
-import projeto.covid.modelo.Pais;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
+import projeto.covid.modelo.Pais;
+import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class FXMLPrincipalController implements TelaMudanca {
 
 	private Pais brasil;
 	private GrupoEstado grupoEstados;
 	private GrupoMunicipio grupoMunicipios;
+	private DiretorioTemp diretorio;
 
 	@FXML
 	protected void botaoPais(ActionEvent event) {
@@ -47,6 +49,7 @@ public class FXMLPrincipalController implements TelaMudanca {
 				this.brasil = FXMLLoadingController.getBrasil();
 				this.grupoEstados = FXMLLoadingController.getGrupoEstados();
 				this.grupoMunicipios = FXMLLoadingController.getGrupoMunicipios();
+				this.diretorio = FXMLLoadingController.getDiretorio();
 			}
 			System.out.println("Nova Tela: " + novaTela + ", Dados: " + dados);
 		}

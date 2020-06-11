@@ -1,21 +1,26 @@
 package projeto.covid.modelo;
 
-public class Dados {
+import java.io.Serializable;
+
+public class Dados implements Serializable, Comparable<Dados> {
 	private String data;
-	private Integer populacao, semanaEpidemia, casosAcumulados, obitosAcumulados;
+	private Integer populacao, semanaEpidemia, casosAcumulados, obitosAcumulados, casosNovos, obitosNovos;
 
 	public Dados(String data, Integer populacao, Integer semanaEpidemia, Integer casosAcumulados,
-			Integer obitosAcumulados) {
+			Integer obitosAcumulados, Integer casosNovos, Integer obitosNovos) {
 		this.data = data;
 		this.populacao = populacao;
 		this.semanaEpidemia = semanaEpidemia;
 		this.casosAcumulados = casosAcumulados;
 		this.obitosAcumulados = obitosAcumulados;
+		this.casosNovos = casosNovos;
+		this.obitosNovos = obitosNovos;
 	}
 
 	public Dados() {
-		
+
 	}
+
 	@Override
 	public String toString() {
 		return "Data: '" + this.data + "' Populacao: '" + this.populacao + "' SemanaEpidemia: '" + this.semanaEpidemia
@@ -63,4 +68,24 @@ public class Dados {
 		this.obitosAcumulados = obitosAcumulados;
 	}
 
+	public Integer getCasosNovos() {
+		return casosNovos;
+	}
+
+	public void setCasosNovos(Integer casosNovos) {
+		this.casosNovos = casosNovos;
+	}
+
+	public Integer getObitosNovos() {
+		return obitosNovos;
+	}
+
+	public void setObitosNovos(Integer obitosNovos) {
+		this.obitosNovos = obitosNovos;
+	}
+
+	@Override
+	public int compareTo(Dados dados) {
+		return data.compareToIgnoreCase(dados.data);
+	}
 }

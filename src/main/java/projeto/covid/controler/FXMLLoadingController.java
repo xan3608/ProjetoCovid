@@ -1,7 +1,7 @@
 package projeto.covid.controler;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collections;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -12,9 +12,8 @@ import projeto.covid.controler.principal.Principal;
 import projeto.covid.modelo.GrupoEstado;
 import projeto.covid.modelo.GrupoMunicipio;
 import projeto.covid.modelo.Pais;
-import projeto.covid.modelo.database.planilha.DadosDaLinha;
-import projeto.covid.modelo.database.planilha.LeituraPlanilha;
-import projeto.covid.modelo.database.planilha.OrganizaDadosDaPlanilha;
+import projeto.covid.modelo.auxilio.Nacao;
+import projeto.covid.modelo.database.scraping.ApiCsv;
 import projeto.covid.modelo.database.temporario.DiretorioTemp;
 
 public class FXMLLoadingController implements TelaMudanca {
@@ -23,6 +22,7 @@ public class FXMLLoadingController implements TelaMudanca {
 	private static Pais brasil;
 	private static GrupoEstado grupoEstados;
 	private static GrupoMunicipio grupoMunicipios;
+	private static DiretorioTemp diretorio;
 
 	@FXML
 	private TextArea consoleLoading;
@@ -43,41 +43,31 @@ public class FXMLLoadingController implements TelaMudanca {
 			@Override
 			protected Void call() throws Exception {
 
-				DiretorioTemp diretorio = new DiretorioTemp();
-				consoleLoading.appendText("Extraindo arquivos\n");
-//				try {
-//					diretorio.extrairParaTemp();
-//					consoleLoading.appendText("Arquivos extraidos com sucesso\n");
-//				} catch (IOException | URISyntaxException e) {
-//					consoleLoading.appendText("Erro ao extrair arquivos\n");
-//					e.printStackTrace();
-//				}
+				diretorio = new DiretorioTemp();
+				consoleLoading.appendText("Criando diretorios\n");
+				try {
+					diretorio.extrairParaTemp();
+					consoleLoading.appendText("Diretorio criado com sucesso\n");
+				} catch (IOException e) {
+					consoleLoading.appendText("Erro ao criar diretorio\n");
+					e.printStackTrace();
+				}
+				diretorio.getDiretorioFiles();
 				
-//				consoleLoading.appendText("Iniciando selenium\n");
-//				Selenium selenium = new Selenium(diretorio);
-//				consoleLoading.appendText("Buscando dados do Ministerio da Saude\n");
-//				selenium.downloadDados();
-//				System.out.println(selenium.getDownloadName());
-				consoleLoading.appendText("Dados obtidos com sucesso\n");
-				
-				consoleLoading.appendText("Carregando banco de dados\n");
+				consoleLoading.appendText("Criando objetos\n");
 				brasil = new Pais("Brasil");
 				grupoEstados = new GrupoEstado();
 				grupoMunicipios = new GrupoMunicipio();
-				consoleLoading.appendText("Lendo dados da planilha...\n");
-				//LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, selenium.getDownloadName());
-				LeituraPlanilha dadoPlanilha = new LeituraPlanilha(diretorio, "HIST_PAINEL_COVIDBR_20mai2020.xlsx");
-				try {
-					dadoPlanilha.lerDados(brasil, grupoEstados, grupoMunicipios);
-					Runtime.getRuntime().gc();
-					consoleLoading.appendText("Dados lidos com sucesso\n");
-					grupoEstados.getGrupo().sort(null);
-					grupoMunicipios.getGrupo().sort(null);
-					consoleLoading.appendText("Banco de dados carregado com sucesso\n");
-				} catch (IOException e) {
-					consoleLoading.appendText("Erro ao ler dados\n");
-					e.printStackTrace();
-					consoleLoading.appendText("Falha ao carregar banco de dados\n");
+				
+				ApiCsv api = new ApiCsv();
+				api.resquestDados(consoleLoading, grupoEstados, grupoMunicipios);
+				
+				for (Nacao estado : grupoEstados.getGrupo()) {
+					Collections.sort(estado.getDados());
+				}
+				
+				for (Nacao estado : grupoMunicipios.getGrupo()) {
+					Collections.sort(estado.getDados());
 				}
 				
 				Thread.sleep(1500);
@@ -108,5 +98,9 @@ public class FXMLLoadingController implements TelaMudanca {
 
 	public static GrupoMunicipio getGrupoMunicipios() {
 		return FXMLLoadingController.grupoMunicipios;
+	}
+	
+	public static DiretorioTemp getDiretorio() {
+		return FXMLLoadingController.diretorio;
 	}
 }

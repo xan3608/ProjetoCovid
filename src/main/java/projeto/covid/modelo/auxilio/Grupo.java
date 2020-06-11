@@ -1,10 +1,11 @@
 package projeto.covid.modelo.auxilio;
 
+import java.io.Serializable;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Grupo {
+public abstract class Grupo implements Serializable {
 	private List<Nacao> grupo;
 
 	protected Grupo() {
